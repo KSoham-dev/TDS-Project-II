@@ -119,6 +119,7 @@ def send_llm_request(messages):
     #Setting out the request
     r = requests.post(url,headers=headers,json=data)
     the_main_thing = r.json()["choices"][0]["message"]["content"]
+    print(r.json())
     return the_main_thing
     
 #Getting domain of the data
@@ -188,11 +189,11 @@ box_plot_ana_llm = send_llm_request(messages)
 #----------------------------------------------------- 
 content = f"""
 # Data Analysis Project 
-Hey! Hope you are doing fine. Hmm... You've got some interesting data I  
-see. Let's begin this journey with fist identifying what your data is like.  
-So, you have got {df.shape[0]} rows and {df.shape[1]} columns in your data and  
-as I can see this data this data is related to {domian}. Below are some key  
-statistics about the data you provided
+Hey! Hope you are doing fine. Hmm... You've got some interesting data I see.  
+Let's begin this journey with fist identifying what your data is like.  
+So, you have got 100 rows and 500 columns in your data and as I can  
+see this data is related to {domian}. Below are some key statistics  
+about the data you provided  
 
 ## Key Statistics
 {summary_mdt}  
