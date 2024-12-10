@@ -23,62 +23,58 @@ Let's move a little deeper and see what wonders the data is yet to reveal.
 ## Visualizing Data
 Let's see how numerical columns correlate with each other  
   
-![Figure](./goodreads/corr_hmap.png)
+![Figure](./corr_hmap.png)
 
   
-In the realm of the data universe, the correlation heatmap unveils intriguing connections among various aspects of books and their reception. 
+As we delve into the realm of literary connections through our correlation heatmap, a narrative begins to unfold. Picture a world where the influence of each book is interconnected, revealing a tapestry woven from reader engagement and appreciation.
 
-As we delve into the matrix, we notice a strong bond between the **average_rating** and **work_ratings_count**, with a correlation of 0.92. This suggests that higher ratings typically attract more reviews, showcasing a dynamic relationship where popularity begets visibility.
+At the center of our exploration, we find the **average_rating** and **ratings_count**. They stand as robust pillars, jointly illuminating the preferences of readers. A notable positive correlation (0.82) hints at a harmonious relationship: as the average rating climbs, so too does the number of ratings, suggesting that highly regarded books attract more attention and love from readers.
 
-Meanwhile, the **best_book_id** and **work_id** hold a moderate correlation of 0.37, hinting at a shared narrative of quality and audience recognition. It's as if the identifiers of these books collaborate to tell a story of literary excellence.
+Moving outward, we encounter the **original_publication_year**, which reveals a fascinating tale. Its moderate negative correlation (-0.32) with **average_rating** suggests that older publications, while cherished, may not resonate as strongly in contemporary discussions or reviews. This invites us to ponder how times change, and what once was a favorite can fade into obscurity.
 
-Curiously, the **original_publication_year** shows a weak negative correlation with the **average_rating** (-0.32), portraying a possible trend where older titles might receive less favorable ratings in the modern context, reflecting evolving reader preferences over time.
+Complex patterns emerge as we analyze **work_text_reviews_count** and its relationships. Here, a positive correlation (0.71) with **average_rating** indicates that books receiving more reviews generally earn higher ratings, possibly reflecting the engagement and dialogue they inspire among readers.
 
-As we skim over the **ratings_1** to **ratings_5**, a tapestry of relationships unfolds. Notably, the counts of lower ratings (ratings_1 and ratings_2) exhibit a negative correlation with **average_rating**, while the higher ratings (ratings_4 and ratings_5) are positively correlated. This indicates that as a book garners more high ratings, its overall average rating ascends, further reinforcing the impact of reader sentiment.
+Conversely, we observe intriguing dynamics with specific **ratings** features—ratings 1 through 5. The data whispers stories of reader satisfaction and dissent, where negative ratings (ratings_1 and ratings_2) inversely correlate with the average rating, portraying the impact of polarized opinions.
 
-Each square in this heatmap narrates a subplot of literary appreciation, shedding light on how audiences interact with books and how their experiences create a rich, interconnected web of literary discourse. In this vibrant landscape, ratings, publication history, and reader engagement converge to guide future readers on their next literary adventure. 
+Ultimately, this heatmap serves as a mirror, reflecting the intricate ties between literary works and reader interactions. Each correlation paints a part of the story, encouraging us to delve deeper into the motivations behind ratings and the timeless connection books forge among individuals. Through this analysis, we become treasure hunters, seeking to unearth the nuances that lie beneath the surface of numbers, creating a richer understanding of our literary landscape. 
 
 Now in the second figure we'll see numerical columns spread themselves.  
   
-![Figure](./goodreads/histogram.png)
+![Figure](./histogram.png)
 
   
-Once upon a time in the world of literature, a data explorer embarked on a journey through a vast collection of books. Armed with a dataset, they utilized histograms to uncover the hidden stories behind the numbers.
+In a quiet corner of the literary world, a tapestry of data unfolds, encapsulating the wonders of reading through histograms derived from a dataset of books. 
 
-In the first row of histograms, they observed the **book_id**, a seemingly innocuous identifier that, curiously, had a large number of entries clustered close together in a narrow range. It hinted at the existence of few extremely popular books while the rest quietly awaited their moment in the spotlight. The **goodreads_book_id** followed suit, showing a similar pattern, suggesting that many books had been processed or evaluated.
+At first glance, the canvas reveals a variety of distributions, each telling its own tale. The histogram for **book_id** stands out with a curious cluster of values, suggesting a limited selection among an extensive catalog—perhaps some books are more prevalent than others. Nearby, **goodreads_book_id** mirrors this trend, hinting at similar popularity patterns driven by community engagement.
 
-Moving to the **best_book_id**, our explorer noticed a much more varied distribution, sparking intrigue. Here lay the celebrated titles—those that had captured the hearts of readers, demanding attention amongst their peers.
+Turning to **best_book_id**, a striking peak emerges, showcasing that a select few titles dominate the accolades. This suggests that while many books are published, only a handful truly capture readers’ hearts.
 
-As they ventured deeper into the second row, the **books_count** and **isbn13** histograms presented a fascinating contrast. The former exhibited a heavily skewed distribution, indicating that a handful of books had amassed significant counts, while most had seen little action. The **isbn13** revealed a more balanced frequency, hinting at a blend of old favorites and new contenders vying for affection.
+The **work_id** histogram brims with life, as its broad distribution illustrates the extensive body of work represented—each entry a potential journey into different worlds. Meanwhile, **books_count** and **ratings_count** offer a glimpse into the abundance of opinions, where more books lead to a rich tapestry of reader experiences.
 
-The **original_publication_year** histogram painted a timeline of literary history, showing perhaps when the literary world had thrived with creativity. The peaks highlighted eras rich in storytelling, while the valleys suggested quieter times where fewer books found their way into readers’ hands.
+**original_publication_year** paints a historical context, featuring a noticeable concentration of works from certain eras—perhaps reflecting the ebb and flow of literary trends over the decades. 
 
-In the realm of ratings, the **average_rating** histogram stood out, resembling a majestic bell curve. It indicated that most books received favorable reviews from readers, but a few outliers—both adored and despised—spurred any enthusiast’s curiosity.
+Among the more nuanced narratives, **average_rating** unveils a curve inclined towards higher evaluations, resonating with an audience who seems to favor certain literary gems. The ratings from **ratings_1** to **ratings_5** present a compelling sequence; numbers suggest a divergence in reader satisfaction, with a dominant spike in higher ratings, indicating a generally positive reception of books.
 
-The following row highlighted the **ratings_count** and **work_ratings_count**—two metrics that revealed how actively readers engaged with these literary works. The skewed distributions indicated a few books received an abundance of attention, while many remained in the shadows.
-
-Lastly, the **ratings_x** columns—ratings from 1 to 5—unfurled the emotions attached to these books. Most ratings clustered at each end of the spectrum, speaking to passionate readers who either loved or loathed their reads.
-
-Thus, through the lens of histograms, our explorer pieced together the narrative of a vibrant literary ecosystem—filled with celebrated titles and hidden gems, all waiting for the next reader to turn their pages.
+As we step back, the histograms coalesce into a story—a visual symphony of numbers and values, intricately linked to the vibrant world of literature. Each histogram, a chapter filled with insights, reveals not just the popularity of books but the ever-changing landscape of reader preferences and trends. In this blend of data, we find the essence of storytelling, where numbers breathe life into the tales behind each title.
 
 Lastly, we'll see some mischievous datapoints that don't follow the trend (Outliers!).  
   
-![Figure](./goodreads/box_plot.png)
+![Figure](./box_plot.png)
 
   
-In a land of literary treasures, our box plots tell the stories hidden within the vast amounts of book data gathered from a bustling library. 
+Once upon a time in the realm of books, we found ourselves exploring a series of box plots that unveiled the hidden stories within various metrics of the literary world. 
 
-**First up: the Box Plot of `Book_id`**. Here, the central box, stretching between the first and third quartiles, showcases the heart of our book collection, with most of the stories residing within a healthy range. However, isolated whiskers suggest there are some outlier numbers—perhaps rare tomes waiting to be rediscovered.
+In the first corner, the generous box showing "Book_id" revealed a vast range of book identifiers, highlighting the immense diversity in literature. However, nestled within that box lay a few outliers—those rare gems that stood apart from the crowd. 
 
-**Next, we venture into `Goodreads_Goodreads_id`**, another journey into the realm of reader ratings. The box serves as a diary of average experiences, while the long whiskers hint at the polar experiences — both love and disdain for specific reads — likely leading to spirited debates among bibliophiles.
+Next, the "Goodreads_Goodreads_id" box plot echoed a similar tale. Its box width indicated a broad spread of entries, but a number of outliers hinted at unique books that sparked more discussions than others, possibly beloved novels or controversial reads.
 
-**The `Best_book_id` plot** reveals the champion books that have captured readers’ hearts. Its narrow spread shows a consensus among readers about what makes a book great, though outliers whisper of hidden gems that didn’t achieve mainstream success.
+Moving to the "Best_book_id," it was intriguing to see a more compact central box, suggesting that the 'best' books converged around a select few yet again contained those fascinating outliers—books that perhaps captured the hearts of a few but not the masses.
 
-Transitioning to the realm of works, the **`Work_id` box plot** illustrates a rich tapestry of creativity, with substantial variety among works. A few outliers, again, stand tall like skyscrapers in a thriving city, reminding us of the standout pieces that disrupt the norm.
+The "Work_id" plot told of a labor of love, with a wider spread implying a plethora of work types, while outliers stood as testaments to particularly prolific authors who managed to publish a staggering number of works.
 
-**In `Books_count`**, the plot reveals the wealth of volumes some authors possess. This box stretches wide, reflecting prolific writers alongside those with a single grand narrative, showcasing the diversity in literary output.
+As we turned to “Books_count,” we noticed a rise in median values, indicating that many authors are creating more than just a single tale. Yet, just like the other plots, that presence of outliers signified those rare authors whose libraries overflowed with creativity.
 
-Finally, the **`isbn13` plot** paints a picture of organization within chaos. Here, we see data that smoothly conveys the identifier codes, but the scattered outliers remind us of the unique paths books can take in their journey through time.
+Finally, the "isbn13" box plot brought us back to the core of book identification. The box was again broad, but the most fascinating aspect was the outliers—those mysterious books that somehow slipped through the cracks of conventional indexing.
 
-Together, these box plots offer a glimpse into the narrative of the literary world—a landscape filled with varied journeys, celebrated works, and stories waiting for eager readers to explore. Each plot, with its highs and lows, emphasizes the rich diversity and complexity of literature.
+Through these visuals, we traveled across the expanse of literary data, uncovering the unseen stories hidden within the metrics of books, authors, and their contributions to the world of literature. Each box plot told a story of its own, reminding us how diverse and rich the literary landscape truly is.
 

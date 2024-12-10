@@ -202,19 +202,19 @@ Let's move a little deeper and see what wonders the data is yet to reveal.
 ## Visualizing Data
 Let's see how numerical columns correlate with each other  
   
-![Figure](./{folder}/corr_hmap.png)\n
+![Figure](./corr_hmap.png)\n
   
 {corr_hmap_ana_llm} 
 
 Now in the second figure we'll see numerical columns spread themselves.  
   
-![Figure](./{folder}/histogram.png)\n
+![Figure](./histogram.png)\n
   
 {histogram_ana_llm}
 
 Lastly, we'll see some mischievous datapoints that don't follow the trend (Outliers!).  
   
-![Figure](./{folder}/box_plot.png)\n
+![Figure](./box_plot.png)\n
   
 {box_plot_ana_llm}
 
