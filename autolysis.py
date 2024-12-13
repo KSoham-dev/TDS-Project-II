@@ -22,71 +22,130 @@ import seaborn as sns
 import base64
 
 #-----------------------------------------------------
-# Getting file from inline arguments and 
-# converting it to d DataFrame
+# Function to load the dataset
 #-----------------------------------------------------
-file = sys.argv[1]
-folder = os.path.splitext(os.path.basename(file))[0]
-os.makedirs(folder, exist_ok=True)
-try: 
-    df = pd.read_csv(file, encoding='utf-8') 
-except UnicodeDecodeError: 
-    try: 
-        df = pd.read_csv(file, encoding='ISO-8859-1') 
-    except UnicodeDecodeError: 
-        df = pd.read_csv(file, encoding='windows-1252')
-
-
-#-----------------------------------------------------
-# Gets Summary Statistics and converts to 
-# markdown table format
-#----------------------------------------------------- 
-desc = df.describe() 
-desc = desc.round(2)
-desc = desc.map(lambda x: int(x) if not np.isnan(x) else x)
-summary_mdt = desc.to_markdown(index=True)
-
+def load_dataset(file):
+    folder = os.path.splitext(os.path.basename(file))[0]
+    os.makedirs(folder, exist_ok=True)
+    try:
+        df = pd.read_csv(file, encoding='utf-8')
+    except UnicodeDecodeError:
+        try:
+            df = pd.read_csv(file, encoding='ISO-8859-1')
+        except UnicodeDecodeError:
+            df = pd.read_csv(file, encoding='windows-1252')
+    return df, folder
 
 #-----------------------------------------------------
-# Generating three different figures which show
-# various aspects of the data 
-#----------------------------------------------------- 
-# Figure-1: Histogram
-df.hist(bins=100, figsize=(14, 14))
-plt.savefig(f'./{folder}/histogram.png')
-plt.close()
+# Function to analyze missing values
+#-----------------------------------------------------
+def analyze_missing_values(df):
+    """
+    Analyzes missing values in the DataFrame.
 
-#Figure-2: Box Plot
-sns.set_theme(style="whitegrid")
-fig, axes = plt.subplots(nrows=2, ncols=3, figsize=(14, 14))
-fig.suptitle('Box Plots of Variables', fontsize=16)
-axes = axes.flatten()
-variables = df.select_dtypes(include=['number']).columns.tolist()
+    Args:
+        df (DataFrame): Input DataFrame.
 
-for ax, var in zip(axes, variables):
-    sns.boxplot(data=df[var], ax=ax)
-    ax.set_title(f'Box Plot of {var.capitalize()}', fontsize=14)
-    ax.set_xlabel(var.capitalize(), fontsize=12)
-
-
-for i in range(len(variables), len(axes)):
-    fig.delaxes(axes[i])
-
-plt.tight_layout()
-plt.subplots_adjust(top=0.9)
-plt.savefig(f'./{folder}/box_plot.png')
-
-#Figure-3
-fig, ax = plt.subplots(figsize=(14, 14)) 
-sns.heatmap(df.loc[:,variables].corr(), annot=True, fmt=".2f")
-plt.tight_layout()
-plt.savefig(f'./{folder}/corr_hmap.png')
-
+    Returns:
+        str: Markdown table of missing value analysis.
+    """
+    missing_summary = df.isnull().sum().reset_index()
+    missing_summary.columns = ['Column', 'Missing Values']
+    missing_summary['Percentage'] = (missing_summary['Missing Values'] / len(df) * 100).round(2)
+    return missing_summary.to_markdown(index=False)
 
 #-----------------------------------------------------
-# Consulting LLM
-#----------------------------------------------------- 
-# Defining a useful request function
+# Function to handle missing values
+#-----------------------------------------------------
+def handle_missing_values(df):
+    numeric_cols = df.select_dtypes(include=[np.number]).columns
+    df[numeric_cols] = df[numeric_cols].fillna(df[numeric_cols].mean())
+    return df
+
+# #-----------------------------------------------------
+# # Function to generate summary statistics
+# #-----------------------------------------------------
+# def generate_summary_statistics(df):
+#     desc = df.describe().round(2)
+#     desc = desc.map(lambda x: int(x) if not pd.isnull(x) else x)
+#     return desc.to_markdown(index=True)
+
+#-----------------------------------------------------
+# Function to generate advanced statistics
+#-----------------------------------------------------
+def generate_advanced_statistics(df):
+    """
+    Generates advanced statistics including skewness and kurtosis.
+
+    Args:
+        df (DataFrame): Input DataFrame.
+
+    Returns:
+        str: Markdown table of advanced statistics.
+    """
+    numeric_cols = df.select_dtypes(include=[np.number])
+    if numeric_cols.empty:
+        return "No numeric data available for statistical analysis."
+
+    stats = numeric_cols.describe().T
+    stats['Skewness'] = numeric_cols.skew()
+    stats['Kurtosis'] = numeric_cols.kurtosis()
+    stats = stats[['mean', 'std', 'min', '25%', '50%', '75%', 'max', 'Skewness', 'Kurtosis']].round(2)
+    return stats.to_markdown(index=True)
+
+#-----------------------------------------------------
+# Function to create histograms
+#-----------------------------------------------------
+def create_histogram(df, folder):
+    df.hist(bins=100, figsize=(14, 14))
+    plt.suptitle('Histogram of Numerical Features', fontsize=16)
+    plt.xlabel('Values', fontsize=12)
+    plt.ylabel('Frequency', fontsize=12)
+    plt.legend([f'{col}' for col in df.select_dtypes(include=['number']).columns])
+    plt.savefig(f'./{folder}/histogram.png')
+    plt.close()
+
+#-----------------------------------------------------
+# Function to create box plots
+#-----------------------------------------------------
+def create_box_plots(df, folder):
+    sns.set_theme(style="whitegrid")
+    fig, axes = plt.subplots(nrows=2, ncols=3, figsize=(14, 14))
+    fig.suptitle('Box Plots of Variables', fontsize=16)
+    axes = axes.flatten()
+    variables = df.select_dtypes(include=['number']).columns.tolist()
+
+    for ax, var in zip(axes, variables):
+        sns.boxplot(data=df[var], ax=ax)
+        ax.set_title(f'Box Plot of {var.capitalize()}', fontsize=14)
+        ax.set_xlabel(var.capitalize(), fontsize=12)
+        ax.set_ylabel('Values', fontsize=12)
+
+    for i in range(len(variables), len(axes)):
+        fig.delaxes(axes[i])
+
+    plt.tight_layout()
+    plt.subplots_adjust(top=0.9)
+    plt.legend(variables, loc='upper right')
+    plt.savefig(f'./{folder}/box_plot.png')
+
+#-----------------------------------------------------
+# Function to create correlation heatmap
+#-----------------------------------------------------
+def create_correlation_heatmap(df, folder):
+    variables = df.select_dtypes(include=['number']).columns.tolist()
+    fig, ax = plt.subplots(figsize=(14, 14))
+    sns.heatmap(df.loc[:, variables].corr(), annot=True, fmt=".2f", cmap='coolwarm')
+    plt.title('Correlation Heatmap of Numerical Features', fontsize=16)
+    plt.xlabel('Features', fontsize=12)
+    plt.ylabel('Features', fontsize=12)
+    plt.legend(variables, loc='upper right')
+    plt.tight_layout()
+    plt.savefig(f'./{folder}/corr_hmap.png')
+
+#-----------------------------------------------------
+# Function to send request to LLM
+#-----------------------------------------------------
 def send_llm_request(messages):
     """
     Sends a request to the LLM using the provided message parameter and returns the main content.
@@ -97,106 +156,111 @@ def send_llm_request(messages):
     Returns:
         str: The main content returned by the LLM.
     """
+    try:
+        # Setting up API_KEY and model to be used
+        API_KEY = os.environ["AIPROXY_TOKEN"]
+        model = "gpt-4o-mini"
 
-    
-    # Setting up API_KEY and model to be used
-    API_KEY = os.environ["AIPROXY_TOKEN"]
-    model = "gpt-4o-mini"
+        # Setting up request headers 
+        headers = {
+                "Authorization": f"Bearer {API_KEY}",
+                "Content-Type": "application/json"
+        }
+        
+        # Setting up request body
+        data = {
+            "model": model,
+            "messages": messages
+        }
+        url = "https://aiproxy.sanand.workers.dev/openai/v1/chat/completions"
+        
+        # Sending the request
+        r = requests.post(url, headers=headers, json=data)
+        r.raise_for_status()  # Check for HTTP request errors
+        the_main_thing = r.json()["choices"][0]["message"]["content"]
+        return the_main_thing
+    except requests.exceptions.RequestException as e:
+        print(f"Error during API request: {e}")
+        return "LLM request failed. Please try again later."
 
-    #Setting up request headers 
-    headers = {
-            "Authorization": f"Bearer {API_KEY}",
-            "Content-Type": "application/json"
-    }
-    
-    #Setting up request body
-    data = {
-        "model": model,
-        "messages": messages
-    }
-    url = "https://aiproxy.sanand.workers.dev/openai/v1/chat/completions"
-    
-    #Setting out the request
-    r = requests.post(url,headers=headers,json=data)
-    the_main_thing = r.json()["choices"][0]["message"]["content"]
-    print(r.json())
-    return the_main_thing
-    
-#Getting domain of the data
-messages = [
-    {"role": "system", "content": "Determine the domain based on column names in the data in only one word"},
-    {"role": "user", "content": str(df.columns)}
-]
-domian = send_llm_request(messages)
-
-
-#Getting Information about the charts obtained
 #-----------------------------------------------------
-# Converting images to base64
-#----------------------------------------------------- 
-with open(f"./{folder}/box_plot.png", "rb") as image_file: 
-    box_plot_enc = base64.b64encode(image_file.read()).decode("utf-8")
-    
-with open(f"./{folder}/corr_hmap.png", "rb") as image_file: 
-    corr_hmap_enc = base64.b64encode(image_file.read()).decode("utf-8")
-    
-with open(f"./{folder}/histogram.png", "rb") as image_file: 
-    histogram_enc = base64.b64encode(image_file.read()).decode("utf-8")
-    
+# Function to get domain of the data
+#-----------------------------------------------------
+def get_domain(df):
+    messages = [
+        {"role": "system", "content": "Determine the domain based on column names in the data in only one word"},
+        {"role": "user", "content": str(df.columns)}
+    ]
+    return send_llm_request(messages)
+
+#-----------------------------------------------------
+# Function to build messages for LLM analysis
+#-----------------------------------------------------
 def build_msgs(text, img):
     """
     Generates the 'messages' parameter for the request body using the provided prompt and encoded image.
 
     Args:
         text (str): The input prompt.
-        imge (str): The encoded image data.
+        img (str): The encoded image data.
 
     Returns:
         (list): A list 'messages' as required by request body.
     """
     return [{
-      "role": "user",
-      "content": [
-        {
-          "type": "text",
-          "text": text,
-        },
-        {
-          "type": "image_url",
-          "image_url": {
-            "url":  f"data:image/jpeg;base64,{img}",
-            "detail": "low"
-          },
-        },
-      ],
-    }
-  ]
-    
-# Histogram Analysis by LLM
-messages=build_msgs("This figure contains histograms from df.hist(). Provide a brief analysis in a story-telling way", histogram_enc)
-histogram_ana_llm = send_llm_request(messages)
-
-# Correlation Heatmap Analysis by LLM
-messages=build_msgs("This figure contains correlation heatmap.Provide a brief analysis in a story-telling way", corr_hmap_enc)
-corr_hmap_ana_llm = send_llm_request(messages)
-
-# Box-Plot Analysis by LLM
-messages=build_msgs("This figure contains box-plots.Provide a brief analysis in a story-telling way", box_plot_enc)
-box_plot_ana_llm = send_llm_request(messages)
+        "role": "user",
+        "content": [
+            {
+                "type": "text",
+                "text": text,
+            },
+            {
+                "type": "image_url",
+                "image_url": {
+                    "url":  f"data:image/jpeg;base64,{img}",
+                    "detail": "low"
+                },
+            },
+        ],
+    }]
 
 #-----------------------------------------------------
-# Binding all this into README.md
-#----------------------------------------------------- 
-content = f"""
+# Function to perform LLM analysis
+#-----------------------------------------------------
+def perform_llm_analysis(images, folder):
+    analyses = {}
+    for img_type, img_path in images.items():
+        with open(f"./{folder}/{img_path}", "rb") as image_file:
+            img_enc = base64.b64encode(image_file.read()).decode("utf-8")
+        if img_type == "histogram":
+            text = "This figure contains histograms from df.hist(). Provide a brief analysis in a story-telling way"
+        elif img_type == "box_plot":
+            text = "This figure contains box-plots. Provide a brief analysis in a story-telling way"
+        elif img_type == "corr_hmap":
+            text = "This figure contains correlation heatmap. Provide a brief analysis in a story-telling way"
+        messages = build_msgs(text, img_enc)
+        analyses[img_type] = send_llm_request(messages)
+    return analyses
+
+#-----------------------------------------------------
+# Function to create README.md content
+#-----------------------------------------------------
+def create_readme_content(df,folder, domain, adv_stat_mdt, analyses, missing_mdt):
+    content = f"""
 # Data Analysis Project 
 Hey! Hope you are doing fine. Hmm... You've got some interesting data I see.  
-Let's begin this journey with fist identifying what your data is like.  
-So, you have got 100 rows and 500 columns in your data and as I can  
-see this data is related to {domian}. Below are some key statistics  
+Let's begin this journey with first identifying what your data is like.  
+So, you have got {df.shape[0]} rows and {df.shape[1]} columns in your data and as I can  
+see this data is related to {domain}. Below are some key statistics  
 about the data you provided  
 
-## Key Statistics
-{summary_mdt}  
+## Missing Value Analysis
+The dataset contains the following missing values:
+
+{missing_mdt}
+
+## Advanced Statistical Analysis
+{adv_stat_mdt}  
   
 Let's move a little deeper and see what wonders the data is yet to reveal.
   
@@ -205,20 +269,44 @@ Let's see how numerical columns correlate with each other
   
 ![Figure](./corr_hmap.png)\n
   
-{corr_hmap_ana_llm} 
+{analyses['corr_hmap']} 
 
 Now in the second figure we'll see numerical columns spread themselves.  
   
 ![Figure](./histogram.png)\n
   
-{histogram_ana_llm}
+{analyses['histogram']}
 
 Lastly, we'll see some mischievous datapoints that don't follow the trend (Outliers!).  
   
 ![Figure](./box_plot.png)\n
   
-{box_plot_ana_llm}
+{analyses['box_plot']}
 
 """
-with open(f'./{folder}/README.md', 'w') as file: 
-    file.write(content)
+    with open(f'./{folder}/README.md', 'w') as file:
+        file.write(content)
+
+#-----------------------------------------------------
+# Main function to execute the script
+#-----------------------------------------------------
+def main(file):
+    df, folder = load_dataset(file)
+    df = handle_missing_values(df)
+    missing_mdt = analyze_missing_values(df)
+    adv_stat_mdt = generate_advanced_statistics(df)
+    create_histogram(df, folder)
+    create_box_plots(df, folder)
+    create_correlation_heatmap(df, folder)
+    domain = get_domain(df)
+    images = {
+        "histogram": "histogram.png",
+        "box_plot": "box_plot.png",
+        "corr_hmap": "corr_hmap.png"
+    }
+    analyses = perform_llm_analysis(images, folder)
+    create_readme_content(df,folder, domain, adv_stat_mdt, analyses, missing_mdt)
+
+if __name__ == "__main__":
+    file = sys.argv[1]
+    main(file)
