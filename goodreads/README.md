@@ -1,10 +1,10 @@
 
 # Data Analysis Project 
 Hey! Hope you are doing fine. Hmm... You've got some interesting data I see.  
-Let's begin this journey with first identifying what your data is like.  
-So, you have got 10000 rows and 23 columns in your data and as I can  
-see this data is related to Books. Below are some key statistics  
-about the data you provided  
+Let's begin this journey by first identifying what your data is like.  
+So, you have got 10000 rows and 23 columns in your data, and as I can  
+see, this data is related to Books. Below are some key statistics  
+about the data you provided:
 
 ## Missing Value Analysis
 The dataset contains the following missing values:
@@ -58,58 +58,460 @@ The dataset contains the following missing values:
 Let's move a little deeper and see what wonders the data is yet to reveal.
   
 ## Visualizing Data
-Let's see how numerical columns correlate with each other  
-  
-![Figure](./corr_hmap.png)
+### Correlation Heatmap
+Understanding how numerical columns correlate with each other can provide insights into potential relationships and dependencies between variables. Here's a heatmap showing these correlations:
+
+![Correlation Heatmap](./corr_hmap.png)
 
   
-Once upon a time in the world of literature, a curious analyst set out on a quest to uncover the hidden relationships among various numerical features of books. Armed with a colorful correlation heatmap, they ventured into a sea of data, each square shimmering in hues of red and blue, representing the strength and direction of correlations.
+In the vibrant landscape of a correlation heatmap, each hue tells a story of relationships among the numerical features of a dataset about books and their ratings. At first glance, we see the unmistakable warmth of strong correlations glimmering in shades of red. A perfect correlation of 1.00 is established between `book_id` and itself, but as we delve deeper, intriguing associations unfold.
 
-At the heart of the map, the correlation between **average_rating** and **ratings_count** stood out like a guiding star, with a perfect score of 0.96. This strong bond suggested that books with higher ratings often attracted more reviews, hinting at the power of word-of-mouth in the literary world.
+The feature `average_rating` stands out prominently. Its strong correlation with `ratings_count` (0.96) hints at a narrative where books that garner more ratings often enjoy higher average scores. This suggests a vibrant community of readers actively engaging with popular titles, reflecting an ecosystem where visibility breeds success. 
 
-As the analyst explored further, they noticed a less obvious but intriguing connection: **original_publication_year** and **best_book_id** showed a moderate correlation of 0.37. This meant that newer books were often recognized as bestsellers sooner than older ones, perhaps reflecting the changing tastes of readers over time.
+Moving across the heatmap, we notice `work_text_reviews_count` and `ratings_count`, which exhibit a solid correlation of 0.87. This relationship indicates that books with plentiful reviews often attract a larger number of ratings. Readers are likely more inclined to rate books that have already been discussed extensively.
 
-However, not all relationships were rosy. The analyst noted a negative correlation between **ratings_1** and **ratings_5** at -0.41. This suggested a peculiar trend: when readers rated books poorly, those same books rarely received stellar reviews. Such insights painted a nuanced picture of reader behavior and preferences.
+However, not all correlations are equally warm. Features like `best_book_id` show a weaker relationship with others, indicating that while some titles may be crowned as the best, they don't necessarily align closely with other numerical metrics like ratings or reviews. This raises questions: Is the "best" book universally loved, or does it have niche appeal?
 
-The analyst couldn't help but marvel at the stories that lay hidden within the correlations. With each relationship illuminated, they realized that data was not just numbers but a canvas depicting the vibrant interactions between readers and their beloved stories. Inspired by these revelations, the analyst set off to share their findings, eager to inform authors and publishers alike about the intricate dance of the literary world. 
+Our journey through the heatmap also reveals some cool spots—correlations close to zero—suggesting that certain features are independent or only weakly related. For instance, `original_publication_year`, with minimal correlation to most other features, might suggest that a book's publication date has little bearing on its current popularity or reception.
 
-Now in the second figure we'll see numerical columns spread themselves.  
-  
-![Figure](./histogram.png)
+As we weave these threads together, the heatmap becomes a rich tapestry of insights, showcasing a dynamic interplay between ratings, reviews, and a book’s reception. It prompts deeper exploration into factors influencing a book's journey from being penned to being talked about, inviting subsequent analyses that could uncover even more layers of the literary universe. 
 
-  
-In this captivating visualization, we dive into the world of books and their ratings, represented through an array of histograms that depict various numerical features from the dataset.
+### Histograms
+Histograms help us understand the distribution of numerical columns. They can reveal patterns such as skewness, modality, and the presence of outliers. Here's a look at the histograms for the numerical columns:
 
-Starting at the top left, the histogram for **book_id** presents a uniform distribution, suggesting that every book in our collection enjoys equal representation. Moving to **goodreads_book_id** and **best_book_id**, we see a significant concentration at the lower end, highlighting that many books are featured while only a few ascend to the revered status of being a "best book."
-
-As we traverse the grid, the **books_count** histogram reveals a more complex story; most books have a modest count, with few rare outliers suggesting classics or popular titles that have garnered significant readership. The **average_rating** histogram takes the spotlight with its pronounced peak, clustering around higher ratings. This suggests that readers tend to rate their favorite books more favorably.
-
-Looking at the **ratings_count** and **work_ratings_count** histograms, we notice a heavy right-skew, indicating that while many books receive few ratings, a select few masterpieces have gathered thousands of opinions—a testament to their popularity.
-
-The **original_publication_year** adds a historical context to our narrative, showcasing a peak that suggests a golden age of publication in the early 2000s, while the more recent years shine with a growing number of new releases.
-
-Finally, the **ratings_*** histograms (from 1 to 5 stars) narrate how feedback from readers ranges dramatically. The 5-star ratings dominate, opening a window into reader satisfaction, while the lower ratings taper off, suggesting that negativity is less common in reader reviews.
-
-Together, these histograms tell a powerful story: a vibrant, popular literary landscape where a few exceptional titles stand out amongst a sea of books—each contributing its own unique voice to the community of readers.
-
-Lastly, we'll see some mischievous datapoints that don't follow the trend (Outliers!).  
-  
-![Figure](./box_plot.png)
+![Histograms](./histogram.png)
 
   
-In the realm of literature, we embark on a journey through box plots that unveil the stories behind various book metrics. Each box plot represents a unique aspect of book data, showcasing their hidden tales.
+In the world of books represented in this dataset, we take a journey through the various metrics that tell us more about the literary landscape.
 
-Starting with the **Box Plot of Book_id**, the long reach of the whiskers suggests a wide range of values, indicating a rich variety of titles, some soaring high above the others as evident from the outliers—those remarkable books that stand out from the crowd.
+Starting with the **book_id** histogram, we see a wide array of unique entries, hinting at a rich catalog of titles, but with clusters that suggest there might be some underrepresented works.
 
-Next, we transition to the **Goodreads Book_id** plot. Here, we notice a similar narrative: while most books cluster in the lower range, a few noteworthy titles break through, suggesting they might be the favorites of the audience, garnering significant attention.
+Moving over to **goodreads_book_id** and **best_book_id**, we notice a significant number of entries, even though they tell a similar story. These numbers reflect the diversity in reader engagement and highlight how many books are recognized and cherished in the Goodreads community.
 
-In the **Box Plot of Best_book_id**, the plot presents a more condensed view. This indicates that the best books tend to have a tighter score range, hinting at a consensus on what readers consider 'best.' The presence of a couple of outliers again highlights those exceptional outliers achieving higher acclaim.
+The **work_id** histogram shows an intriguing distribution, signaling that some literary works have garnered much more attention than others, perhaps hinting at the rise of certain bestsellers or recurring themes within popular literature.
 
-Moving on to the **Work_id Box Plot**, we see a broad distribution akin to our first plot. However, this one seems to house more outliers, possibly indicating a larger number of works that differ significantly from the norm, perhaps due to varying genres or themes.
+As we delve into **books_count**, the peaks indicate that a handful of authors or titles may dominate the market, while a long tail suggests a vast array of lesser-known works, waiting to be discovered.
 
-The **Books_count Box Plot** speaks volumes about the diversity of titles across different works. The wider interquartile range suggests that while many books hover around a moderate count, there's an intriguing side of hefty tomes—those with a significantly larger volume.
+The **average_rating** histogram presents a more insightful analysis—it's clear that most books hover around the mid-range ratings. However, there is a noticeable spike towards the higher ratings, revealing that while many books are appreciated, a select few are truly adored by readers.
 
-Finally, the **ISBN13 Box Plot** gives us insight into the identifiers of these books. The narrow distribution reveals that most books have fairly standard ISBNs, but again, a couple of outliers pop up, hinting at unique publications that stray from the conventional path.
+**ratings_count** and **ratings_1** to **ratings_5** provide us a window into reader sentiments. The varying distributions indicate that while most books receive a moderate level of ratings, some have attracted criticism, evidenced by the presence of the one-star ratings. This paints a picture of polarized opinions among readers.
 
-Through these box plots, we weave together a narrative of diversity, acclaim, and the distinctive characteristics that define our literary landscape. Each variable tells us about the richness of book publishing, showcasing an array of stories waiting to be discovered.
+Overall, this collection of histograms invites us to explore further. The dataset reveals the complexities of reader preferences and highlights the stark contrasts between popular and lesser-known works, ultimately capturing the dynamic nature of the literary world. Each bar represents a story, all waiting to be told.
+
+### Box Plots
+Box plots are useful for identifying outliers and understanding the spread and central tendency of the data. Here's a look at the box plots for the numerical columns:
+
+![Box Plots](./box_plot.png)
+
+  
+In the world of data, box plots stand as beacons of insight, unraveling the stories behind the numbers. This figure presents a series of box plots, each revealing different aspects of a literary universe encapsulated by variables like `Book_id`, `Goodreads_id`, `Best_book_id`, `Work_id`, `Books_count`, and `isbn13`.
+
+### The Journey Begins
+
+On the top left, the box plot of `Book_id` showcases a sprawling range, hinting at a rich diversity of entries with values soaring above 8,000. However, lurking beneath the surface, we notice a sprinkling of outliers, suggesting that some books have garnered unusually high attention or have unique attributes.
+
+### Turning to Goodreads
+
+Next, we glide over to the `Goodreads_id` plot. Here, the distribution tells a tale of concentrated values, with most clustering around the center, yet a handful of outliers stretching the limits. This suggests that while most books follow a common pattern, a select few stand out, perhaps due to high ratings or significant reader engagement.
+
+### The Best of the Best
+
+Moving on to the `Best_book_id` plot, we see a similar story unfold. The interquartile range is compact, yet it too reveals outlying stars in the literary cosmos. These outliers could be the beloved titles that have captured the hearts of readers far and wide.
+
+### A Broader View with Work_id
+
+The `Work_id` box plot introduces a hint of complexity. The values here seem to be equally broad, yet the presence of many outliers indicates a few works that have received extraordinary levels of recognition or have been updated with new editions, making them stand out in the crowd.
+
+### Quantifying Books
+
+In the middle, the `Books_count` box plot tells another facet of the story, displaying an intriguing spread where a significant number of entries gather close to the median. The hint of outliers suggests that while many books have a standard number of editions, a few have amassed an impressive collection of versions or continuations.
+
+### The ISBN Perspective
+
+Finally, we arrive at the `isbn13` plot. A treasure trove of information in its own right, this plot presents a striking range of values, hinting at the vast array of books cataloged through the ISBN system. Again, we observe the outliers, revealing potentially rare editions or books from niche categories that have found their way into the bibliophile's collection.
+
+### Concluding Thoughts
+
+Together, these box plots weave a narrative of diversity and distinction within the literary realm. They reflect not just the quantity of books but the varied journeys they undertake, from the sturdy bestsellers to the hidden gems that deserve to be celebrated. Each plot invites us to delve deeper into the statistics, encouraging exploration in the stories that these numbers conceal.
+
+## Chi-Square Test Reports
+Chi-square tests help us understand the relationships between categorical variables. Here are the results of the chi-square tests for pairs of categorical columns:
+
+
+### Chi-Square Test for isbn and authors
+
+| Metric | Value |
+| --- | --- |
+| Chi-Square Statistic | 40882800.0000 |
+| p-value | 0.3134 |
+| Degrees of Freedom | 40878404 |
+| Expected Frequencies | [[0.00010753 0.00064516 0.00010753 ... 0.00010753 0.00010753 0.00010753]
+ [0.00010753 0.00064516 0.00010753 ... 0.00010753 0.00010753 0.00010753]
+ [0.00010753 0.00064516 0.00010753 ... 0.00010753 0.00010753 0.00010753]
+ ...
+ [0.00010753 0.00064516 0.00010753 ... 0.00010753 0.00010753 0.00010753]
+ [0.00010753 0.00064516 0.00010753 ... 0.00010753 0.00010753 0.00010753]
+ [0.00010753 0.00064516 0.00010753 ... 0.00010753 0.00010753 0.00010753]] |
+
+
+### Chi-Square Test for isbn and original_title
+
+| Metric | Value |
+| --- | --- |
+| Chi-Square Statistic | 77374630.0000 |
+| p-value | 0.2413 |
+| Degrees of Freedom | 77365895 |
+| Expected Frequencies | [[0.00056446 0.00011289 0.00011289 ... 0.00011289 0.00011289 0.00011289]
+ [0.00056446 0.00011289 0.00011289 ... 0.00011289 0.00011289 0.00011289]
+ [0.00056446 0.00011289 0.00011289 ... 0.00011289 0.00011289 0.00011289]
+ ...
+ [0.00056446 0.00011289 0.00011289 ... 0.00011289 0.00011289 0.00011289]
+ [0.00056446 0.00011289 0.00011289 ... 0.00011289 0.00011289 0.00011289]
+ [0.00056446 0.00011289 0.00011289 ... 0.00011289 0.00011289 0.00011289]] |
+
+
+### Chi-Square Test for isbn and title
+
+| Metric | Value |
+| --- | --- |
+| Chi-Square Statistic | 86173800.0000 |
+| p-value | 0.2401 |
+| Degrees of Freedom | 86164534 |
+| Expected Frequencies | [[0.00010753 0.00010753 0.00021505 ... 0.00010753 0.00010753 0.00010753]
+ [0.00010753 0.00010753 0.00021505 ... 0.00010753 0.00010753 0.00010753]
+ [0.00010753 0.00010753 0.00021505 ... 0.00010753 0.00010753 0.00010753]
+ ...
+ [0.00010753 0.00010753 0.00021505 ... 0.00010753 0.00010753 0.00010753]
+ [0.00010753 0.00010753 0.00021505 ... 0.00010753 0.00010753 0.00010753]
+ [0.00010753 0.00010753 0.00021505 ... 0.00010753 0.00010753 0.00010753]] |
+
+
+### Chi-Square Test for isbn and language_code
+
+| Metric | Value |
+| --- | --- |
+| Chi-Square Statistic | 189888.0000 |
+| p-value | 0.4847 |
+| Degrees of Freedom | 189865 |
+| Expected Frequencies | [[0.00133236 0.00036337 0.00641957 ... 0.00012112 0.00012112 0.00012112]
+ [0.00133236 0.00036337 0.00641957 ... 0.00012112 0.00012112 0.00012112]
+ [0.00133236 0.00036337 0.00641957 ... 0.00012112 0.00012112 0.00012112]
+ ...
+ [0.00133236 0.00036337 0.00641957 ... 0.00012112 0.00012112 0.00012112]
+ [0.00133236 0.00036337 0.00641957 ... 0.00012112 0.00012112 0.00012112]
+ [0.00133236 0.00036337 0.00641957 ... 0.00012112 0.00012112 0.00012112]] |
+
+
+### Chi-Square Test for isbn and image_url
+
+| Metric | Value |
+| --- | --- |
+| Chi-Square Statistic | 56590500.0000 |
+| p-value | 0.2836 |
+| Degrees of Freedom | 56584415 |
+| Expected Frequencies | [[1.07526882e-04 1.07526882e-04 1.07526882e-04 ... 1.07526882e-04
+  1.07526882e-04 3.45698925e-01]
+ [1.07526882e-04 1.07526882e-04 1.07526882e-04 ... 1.07526882e-04
+  1.07526882e-04 3.45698925e-01]
+ [1.07526882e-04 1.07526882e-04 1.07526882e-04 ... 1.07526882e-04
+  1.07526882e-04 3.45698925e-01]
+ ...
+ [1.07526882e-04 1.07526882e-04 1.07526882e-04 ... 1.07526882e-04
+  1.07526882e-04 3.45698925e-01]
+ [1.07526882e-04 1.07526882e-04 1.07526882e-04 ... 1.07526882e-04
+  1.07526882e-04 3.45698925e-01]
+ [1.07526882e-04 1.07526882e-04 1.07526882e-04 ... 1.07526882e-04
+  1.07526882e-04 3.45698925e-01]] |
+
+
+### Chi-Square Test for isbn and small_image_url
+
+| Metric | Value |
+| --- | --- |
+| Chi-Square Statistic | 56590500.0000 |
+| p-value | 0.2836 |
+| Degrees of Freedom | 56584415 |
+| Expected Frequencies | [[1.07526882e-04 1.07526882e-04 1.07526882e-04 ... 1.07526882e-04
+  1.07526882e-04 3.45698925e-01]
+ [1.07526882e-04 1.07526882e-04 1.07526882e-04 ... 1.07526882e-04
+  1.07526882e-04 3.45698925e-01]
+ [1.07526882e-04 1.07526882e-04 1.07526882e-04 ... 1.07526882e-04
+  1.07526882e-04 3.45698925e-01]
+ ...
+ [1.07526882e-04 1.07526882e-04 1.07526882e-04 ... 1.07526882e-04
+  1.07526882e-04 3.45698925e-01]
+ [1.07526882e-04 1.07526882e-04 1.07526882e-04 ... 1.07526882e-04
+  1.07526882e-04 3.45698925e-01]
+ [1.07526882e-04 1.07526882e-04 1.07526882e-04 ... 1.07526882e-04
+  1.07526882e-04 3.45698925e-01]] |
+
+
+### Chi-Square Test for authors and original_title
+
+| Metric | Value |
+| --- | --- |
+| Chi-Square Statistic | 41104686.6046 |
+| p-value | 0.0000 |
+| Degrees of Freedom | 40940295 |
+| Expected Frequencies | [[0.00053107 0.00010621 0.00010621 ... 0.00010621 0.00010621 0.00010621]
+ [0.00053107 0.00010621 0.00010621 ... 0.00010621 0.00010621 0.00010621]
+ [0.00265534 0.00053107 0.00053107 ... 0.00053107 0.00053107 0.00053107]
+ ...
+ [0.00053107 0.00010621 0.00010621 ... 0.00010621 0.00010621 0.00010621]
+ [0.00106213 0.00021243 0.00021243 ... 0.00021243 0.00021243 0.00021243]
+ [0.00106213 0.00021243 0.00021243 ... 0.00021243 0.00021243 0.00021243]] |
+
+
+### Chi-Square Test for authors and title
+
+| Metric | Value |
+| --- | --- |
+| Chi-Square Statistic | 46389649.2283 |
+| p-value | 1.0000 |
+| Degrees of Freedom | 46457469 |
+| Expected Frequencies | [[0.0001 0.0001 0.0001 ... 0.0001 0.0001 0.0001]
+ [0.0002 0.0002 0.0002 ... 0.0002 0.0002 0.0002]
+ [0.0006 0.0006 0.0006 ... 0.0006 0.0006 0.0006]
+ ...
+ [0.0001 0.0001 0.0001 ... 0.0001 0.0001 0.0001]
+ [0.0002 0.0002 0.0002 ... 0.0002 0.0002 0.0002]
+ [0.0002 0.0002 0.0002 ... 0.0002 0.0002 0.0002]] |
+
+
+### Chi-Square Test for authors and language_code
+
+| Metric | Value |
+| --- | --- |
+| Chi-Square Statistic | 167417.0082 |
+| p-value | 0.0000 |
+| Degrees of Freedom | 100704 |
+| Expected Frequencies | [[0.00717811 0.00033647 0.00044863 ... 0.00011216 0.00011216 0.00011216]
+ [0.01435621 0.00067295 0.00089726 ... 0.00022432 0.00022432 0.00022432]
+ [0.04306864 0.00201884 0.00269179 ... 0.00067295 0.00067295 0.00067295]
+ ...
+ [0.00717811 0.00033647 0.00044863 ... 0.00011216 0.00011216 0.00011216]
+ [0.01435621 0.00067295 0.00089726 ... 0.00022432 0.00022432 0.00022432]
+ [0.01435621 0.00067295 0.00089726 ... 0.00022432 0.00022432 0.00022432]] |
+
+
+### Chi-Square Test for authors and image_url
+
+| Metric | Value |
+| --- | --- |
+| Chi-Square Statistic | 30601473.4322 |
+| p-value | 1.0000 |
+| Degrees of Freedom | 31092884 |
+| Expected Frequencies | [[1.0000e-04 1.0000e-04 1.0000e-04 ... 1.0000e-04 1.0000e-04 3.3320e-01]
+ [2.0000e-04 2.0000e-04 2.0000e-04 ... 2.0000e-04 2.0000e-04 6.6640e-01]
+ [6.0000e-04 6.0000e-04 6.0000e-04 ... 6.0000e-04 6.0000e-04 1.9992e+00]
+ ...
+ [1.0000e-04 1.0000e-04 1.0000e-04 ... 1.0000e-04 1.0000e-04 3.3320e-01]
+ [2.0000e-04 2.0000e-04 2.0000e-04 ... 2.0000e-04 2.0000e-04 6.6640e-01]
+ [2.0000e-04 2.0000e-04 2.0000e-04 ... 2.0000e-04 2.0000e-04 6.6640e-01]] |
+
+
+### Chi-Square Test for authors and small_image_url
+
+| Metric | Value |
+| --- | --- |
+| Chi-Square Statistic | 30601473.4322 |
+| p-value | 1.0000 |
+| Degrees of Freedom | 31092884 |
+| Expected Frequencies | [[1.0000e-04 1.0000e-04 1.0000e-04 ... 1.0000e-04 1.0000e-04 3.3320e-01]
+ [2.0000e-04 2.0000e-04 2.0000e-04 ... 2.0000e-04 2.0000e-04 6.6640e-01]
+ [6.0000e-04 6.0000e-04 6.0000e-04 ... 6.0000e-04 6.0000e-04 1.9992e+00]
+ ...
+ [1.0000e-04 1.0000e-04 1.0000e-04 ... 1.0000e-04 1.0000e-04 3.3320e-01]
+ [2.0000e-04 2.0000e-04 2.0000e-04 ... 2.0000e-04 2.0000e-04 6.6640e-01]
+ [2.0000e-04 2.0000e-04 2.0000e-04 ... 2.0000e-04 2.0000e-04 6.6640e-01]] |
+
+
+### Chi-Square Test for original_title and title
+
+| Metric | Value |
+| --- | --- |
+| Chi-Square Statistic | 87147593.7500 |
+| p-value | 0.0000 |
+| Degrees of Freedom | 86990013 |
+| Expected Frequencies | [[0.00053107 0.00053107 0.00106213 ... 0.00053107 0.00053107 0.00053107]
+ [0.00010621 0.00010621 0.00021243 ... 0.00010621 0.00010621 0.00010621]
+ [0.00010621 0.00010621 0.00021243 ... 0.00010621 0.00010621 0.00010621]
+ ...
+ [0.00010621 0.00010621 0.00021243 ... 0.00010621 0.00010621 0.00010621]
+ [0.00010621 0.00010621 0.00021243 ... 0.00010621 0.00010621 0.00010621]
+ [0.00010621 0.00010621 0.00021243 ... 0.00010621 0.00010621 0.00010621]] |
+
+
+### Chi-Square Test for original_title and language_code
+
+| Metric | Value |
+| --- | --- |
+| Chi-Square Statistic | 192948.1352 |
+| p-value | 0.0001 |
+| Degrees of Freedom | 190601 |
+| Expected Frequencies | [[0.02758621 0.00142687 0.00095125 ... 0.00047562 0.00047562 0.00047562]
+ [0.00689655 0.00035672 0.00023781 ... 0.00011891 0.00011891 0.00011891]
+ [0.00689655 0.00035672 0.00023781 ... 0.00011891 0.00011891 0.00011891]
+ ...
+ [0.00689655 0.00035672 0.00023781 ... 0.00011891 0.00011891 0.00011891]
+ [0.00689655 0.00035672 0.00023781 ... 0.00011891 0.00011891 0.00011891]
+ [0.00689655 0.00035672 0.00023781 ... 0.00011891 0.00011891 0.00011891]] |
+
+
+### Chi-Square Test for original_title and image_url
+
+| Metric | Value |
+| --- | --- |
+| Chi-Square Statistic | 57582995.8376 |
+| p-value | 1.0000 |
+| Degrees of Freedom | 57715152 |
+| Expected Frequencies | [[5.31067446e-04 5.31067446e-04 5.31067446e-04 ... 5.31067446e-04
+  5.31067446e-04 1.69463622e+00]
+ [1.06213489e-04 1.06213489e-04 1.06213489e-04 ... 1.06213489e-04
+  1.06213489e-04 3.38927244e-01]
+ [1.06213489e-04 1.06213489e-04 1.06213489e-04 ... 1.06213489e-04
+  1.06213489e-04 3.38927244e-01]
+ ...
+ [1.06213489e-04 1.06213489e-04 1.06213489e-04 ... 1.06213489e-04
+  1.06213489e-04 3.38927244e-01]
+ [1.06213489e-04 1.06213489e-04 1.06213489e-04 ... 1.06213489e-04
+  1.06213489e-04 3.38927244e-01]
+ [1.06213489e-04 1.06213489e-04 1.06213489e-04 ... 1.06213489e-04
+  1.06213489e-04 3.38927244e-01]] |
+
+
+### Chi-Square Test for original_title and small_image_url
+
+| Metric | Value |
+| --- | --- |
+| Chi-Square Statistic | 57582995.8376 |
+| p-value | 1.0000 |
+| Degrees of Freedom | 57715152 |
+| Expected Frequencies | [[5.31067446e-04 5.31067446e-04 5.31067446e-04 ... 5.31067446e-04
+  5.31067446e-04 1.69463622e+00]
+ [1.06213489e-04 1.06213489e-04 1.06213489e-04 ... 1.06213489e-04
+  1.06213489e-04 3.38927244e-01]
+ [1.06213489e-04 1.06213489e-04 1.06213489e-04 ... 1.06213489e-04
+  1.06213489e-04 3.38927244e-01]
+ ...
+ [1.06213489e-04 1.06213489e-04 1.06213489e-04 ... 1.06213489e-04
+  1.06213489e-04 3.38927244e-01]
+ [1.06213489e-04 1.06213489e-04 1.06213489e-04 ... 1.06213489e-04
+  1.06213489e-04 3.38927244e-01]
+ [1.06213489e-04 1.06213489e-04 1.06213489e-04 ... 1.06213489e-04
+  1.06213489e-04 3.38927244e-01]] |
+
+
+### Chi-Square Test for title and language_code
+
+| Metric | Value |
+| --- | --- |
+| Chi-Square Statistic | 213932.1674 |
+| p-value | 0.2111 |
+| Degrees of Freedom | 213408 |
+| Expected Frequencies | [[0.00717811 0.00033647 0.00044863 ... 0.00011216 0.00011216 0.00011216]
+ [0.00717811 0.00033647 0.00044863 ... 0.00011216 0.00011216 0.00011216]
+ [0.00717811 0.00033647 0.00044863 ... 0.00011216 0.00011216 0.00011216]
+ ...
+ [0.00717811 0.00033647 0.00044863 ... 0.00011216 0.00011216 0.00011216]
+ [0.00717811 0.00033647 0.00044863 ... 0.00011216 0.00011216 0.00011216]
+ [0.00717811 0.00033647 0.00044863 ... 0.00011216 0.00011216 0.00011216]] |
+
+
+### Chi-Square Test for title and image_url
+
+| Metric | Value |
+| --- | --- |
+| Chi-Square Statistic | 66445806.5726 |
+| p-value | 0.1387 |
+| Degrees of Freedom | 66433284 |
+| Expected Frequencies | [[1.000e-04 1.000e-04 1.000e-04 ... 1.000e-04 1.000e-04 3.332e-01]
+ [1.000e-04 1.000e-04 1.000e-04 ... 1.000e-04 1.000e-04 3.332e-01]
+ [1.000e-04 1.000e-04 1.000e-04 ... 1.000e-04 1.000e-04 3.332e-01]
+ ...
+ [1.000e-04 1.000e-04 1.000e-04 ... 1.000e-04 1.000e-04 3.332e-01]
+ [1.000e-04 1.000e-04 1.000e-04 ... 1.000e-04 1.000e-04 3.332e-01]
+ [1.000e-04 1.000e-04 1.000e-04 ... 1.000e-04 1.000e-04 3.332e-01]] |
+
+
+### Chi-Square Test for title and small_image_url
+
+| Metric | Value |
+| --- | --- |
+| Chi-Square Statistic | 66445806.5726 |
+| p-value | 0.1387 |
+| Degrees of Freedom | 66433284 |
+| Expected Frequencies | [[1.000e-04 1.000e-04 1.000e-04 ... 1.000e-04 1.000e-04 3.332e-01]
+ [1.000e-04 1.000e-04 1.000e-04 ... 1.000e-04 1.000e-04 3.332e-01]
+ [1.000e-04 1.000e-04 1.000e-04 ... 1.000e-04 1.000e-04 3.332e-01]
+ ...
+ [1.000e-04 1.000e-04 1.000e-04 ... 1.000e-04 1.000e-04 3.332e-01]
+ [1.000e-04 1.000e-04 1.000e-04 ... 1.000e-04 1.000e-04 3.332e-01]
+ [1.000e-04 1.000e-04 1.000e-04 ... 1.000e-04 1.000e-04 3.332e-01]] |
+
+
+### Chi-Square Test for language_code and image_url
+
+| Metric | Value |
+| --- | --- |
+| Chi-Square Statistic | 167849.2391 |
+| p-value | 0.0000 |
+| Degrees of Freedom | 146952 |
+| Expected Frequencies | [[7.17810677e-03 7.17810677e-03 7.17810677e-03 ... 7.17810677e-03
+  7.17810677e-03 2.00484522e+01]
+ [3.36473755e-04 3.36473755e-04 3.36473755e-04 ... 3.36473755e-04
+  3.36473755e-04 9.39771198e-01]
+ [4.48631673e-04 4.48631673e-04 4.48631673e-04 ... 4.48631673e-04
+  4.48631673e-04 1.25302826e+00]
+ ...
+ [1.12157918e-04 1.12157918e-04 1.12157918e-04 ... 1.12157918e-04
+  1.12157918e-04 3.13257066e-01]
+ [1.12157918e-04 1.12157918e-04 1.12157918e-04 ... 1.12157918e-04
+  1.12157918e-04 3.13257066e-01]
+ [1.12157918e-04 1.12157918e-04 1.12157918e-04 ... 1.12157918e-04
+  1.12157918e-04 3.13257066e-01]] |
+
+
+### Chi-Square Test for language_code and small_image_url
+
+| Metric | Value |
+| --- | --- |
+| Chi-Square Statistic | 167849.2391 |
+| p-value | 0.0000 |
+| Degrees of Freedom | 146952 |
+| Expected Frequencies | [[7.17810677e-03 7.17810677e-03 7.17810677e-03 ... 7.17810677e-03
+  7.17810677e-03 2.00484522e+01]
+ [3.36473755e-04 3.36473755e-04 3.36473755e-04 ... 3.36473755e-04
+  3.36473755e-04 9.39771198e-01]
+ [4.48631673e-04 4.48631673e-04 4.48631673e-04 ... 4.48631673e-04
+  4.48631673e-04 1.25302826e+00]
+ ...
+ [1.12157918e-04 1.12157918e-04 1.12157918e-04 ... 1.12157918e-04
+  1.12157918e-04 3.13257066e-01]
+ [1.12157918e-04 1.12157918e-04 1.12157918e-04 ... 1.12157918e-04
+  1.12157918e-04 3.13257066e-01]
+ [1.12157918e-04 1.12157918e-04 1.12157918e-04 ... 1.12157918e-04
+  1.12157918e-04 3.13257066e-01]] |
+
+
+### Chi-Square Test for image_url and small_image_url
+
+| Metric | Value |
+| --- | --- |
+| Chi-Square Statistic | 66680000.0000 |
+| p-value | 0.0000 |
+| Degrees of Freedom | 44462224 |
+| Expected Frequencies | [[1.0000000e-04 1.0000000e-04 1.0000000e-04 ... 1.0000000e-04
+  1.0000000e-04 3.3320000e-01]
+ [1.0000000e-04 1.0000000e-04 1.0000000e-04 ... 1.0000000e-04
+  1.0000000e-04 3.3320000e-01]
+ [1.0000000e-04 1.0000000e-04 1.0000000e-04 ... 1.0000000e-04
+  1.0000000e-04 3.3320000e-01]
+ ...
+ [1.0000000e-04 1.0000000e-04 1.0000000e-04 ... 1.0000000e-04
+  1.0000000e-04 3.3320000e-01]
+ [1.0000000e-04 1.0000000e-04 1.0000000e-04 ... 1.0000000e-04
+  1.0000000e-04 3.3320000e-01]
+ [3.3320000e-01 3.3320000e-01 3.3320000e-01 ... 3.3320000e-01
+  3.3320000e-01 1.1102224e+03]] |
 

@@ -5,7 +5,8 @@
 #     "pandas",
 #     "requests",
 #     "seaborn",
-#     "tabulate"
+#     "tabulate",
+#     "scipy"
 # ]
 # ///
 
@@ -20,6 +21,7 @@ import sys
 import matplotlib.pyplot as plt
 import seaborn as sns
 import base64
+from scipy.stats import chi2_contingency
 
 #-----------------------------------------------------
 # Function to load the dataset
@@ -62,17 +64,6 @@ def handle_missing_values(df):
     df[numeric_cols] = df[numeric_cols].fillna(df[numeric_cols].mean())
     return df
 
-# #-----------------------------------------------------
-# # Function to generate summary statistics
-# #-----------------------------------------------------
-# def generate_summary_statistics(df):
-#     desc = df.describe().round(2)
-#     desc = desc.map(lambda x: int(x) if not pd.isnull(x) else x)
-#     return desc.to_markdown(index=True)
-
-#-----------------------------------------------------
-# Function to generate advanced statistics
-#-----------------------------------------------------
 def generate_advanced_statistics(df):
     """
     Generates advanced statistics including skewness and kurtosis.
@@ -92,6 +83,48 @@ def generate_advanced_statistics(df):
     stats['Kurtosis'] = numeric_cols.kurtosis()
     stats = stats[['mean', 'std', 'min', '25%', '50%', '75%', 'max', 'Skewness', 'Kurtosis']].round(2)
     return stats.to_markdown(index=True)
+
+
+#-----------------------------------------------------
+# Function to perform chi-square test for all 
+# categorical columns and generate markdown 
+# reports
+#-----------------------------------------------------
+
+def chi_square_tests_all_categorical(df):
+    """
+    Performs chi-square tests on all pairs of categorical columns and generates markdown table reports.
+
+    Args:
+        df (pd.DataFrame): The dataframe containing the data.
+
+    Returns:
+        dict: A dictionary where keys are column pairs and values are markdown table reports of the chi-square test results.
+    """
+    categorical_cols = df.select_dtypes(include=['object']).columns
+    reports = {}
+
+    for i, col1 in enumerate(categorical_cols):
+        for col2 in categorical_cols[i+1:]:
+            # Create a contingency table
+            contingency_table = pd.crosstab(df[col1], df[col2])
+
+            # Perform chi-square test
+            chi2, p, dof, expected = chi2_contingency(contingency_table)
+
+            # Generate markdown table report
+            markdown_report = f"""
+| Metric | Value |
+| --- | --- |
+| Chi-Square Statistic | {chi2:.4f} |
+| p-value | {p:.4f} |
+| Degrees of Freedom | {dof} |
+| Expected Frequencies | {expected} |
+"""
+
+            reports[(col1, col2)] = markdown_report
+
+    return reports
 
 #-----------------------------------------------------
 # Function to create histograms
@@ -245,14 +278,14 @@ def perform_llm_analysis(images, folder):
 #-----------------------------------------------------
 # Function to create README.md content
 #-----------------------------------------------------
-def create_readme_content(df,folder, domain, adv_stat_mdt, analyses, missing_mdt):
+def create_readme_content(df, folder, domain, adv_stat_mdt, analyses, missing_mdt, chi_square_reports):
     content = f"""
 # Data Analysis Project 
 Hey! Hope you are doing fine. Hmm... You've got some interesting data I see.  
-Let's begin this journey with first identifying what your data is like.  
-So, you have got {df.shape[0]} rows and {df.shape[1]} columns in your data and as I can  
-see this data is related to {domain}. Below are some key statistics  
-about the data you provided  
+Let's begin this journey by first identifying what your data is like.  
+So, you have got {df.shape[0]} rows and {df.shape[1]} columns in your data, and as I can  
+see, this data is related to {domain}. Below are some key statistics  
+about the data you provided:
 
 ## Missing Value Analysis
 The dataset contains the following missing values:
@@ -265,25 +298,36 @@ The dataset contains the following missing values:
 Let's move a little deeper and see what wonders the data is yet to reveal.
   
 ## Visualizing Data
-Let's see how numerical columns correlate with each other  
-  
-![Figure](./corr_hmap.png)\n
+### Correlation Heatmap
+Understanding how numerical columns correlate with each other can provide insights into potential relationships and dependencies between variables. Here's a heatmap showing these correlations:
+
+![Correlation Heatmap](./corr_hmap.png)\n
   
 {analyses['corr_hmap']} 
 
-Now in the second figure we'll see numerical columns spread themselves.  
-  
-![Figure](./histogram.png)\n
+### Histograms
+Histograms help us understand the distribution of numerical columns. They can reveal patterns such as skewness, modality, and the presence of outliers. Here's a look at the histograms for the numerical columns:
+
+![Histograms](./histogram.png)\n
   
 {analyses['histogram']}
 
-Lastly, we'll see some mischievous datapoints that don't follow the trend (Outliers!).  
-  
-![Figure](./box_plot.png)\n
+### Box Plots
+Box plots are useful for identifying outliers and understanding the spread and central tendency of the data. Here's a look at the box plots for the numerical columns:
+
+![Box Plots](./box_plot.png)\n
   
 {analyses['box_plot']}
 
+## Chi-Square Test Reports
+Chi-square tests help us understand the relationships between categorical variables. Here are the results of the chi-square tests for pairs of categorical columns:
+
+
+
 """
+    for cols, report in chi_square_reports.items():
+        content += f"\n### Chi-Square Test for {cols[0]} and {cols[1]}\n{report}\n"
+
     with open(f'./{folder}/README.md', 'w') as file:
         file.write(content)
 
@@ -305,7 +349,8 @@ def main(file):
         "corr_hmap": "corr_hmap.png"
     }
     analyses = perform_llm_analysis(images, folder)
-    create_readme_content(df,folder, domain, adv_stat_mdt, analyses, missing_mdt)
+    chi_square_reports = chi_square_tests_all_categorical(df) 
+    create_readme_content(df,folder, domain, adv_stat_mdt, analyses, missing_mdt,chi_square_reports)
 
 if __name__ == "__main__":
     file = sys.argv[1]
