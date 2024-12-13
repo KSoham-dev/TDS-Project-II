@@ -1,8 +1,9 @@
 
-# Data Analysis Project 
+# Data Analysis Project
+
 Hey! Hope you are doing fine. Hmm... You've got some interesting data I see.  
 Let's begin this journey by first identifying what your data is like.  
-So, you have got 2652 rows and 8 columns in your data, and as I can  
+So, you have 2652 rows and 8 columns in your data, and as I can  
 see, this data is related to Reviews. Below are some key statistics  
 about the data you provided:
 
@@ -26,253 +27,227 @@ The dataset contains the following missing values:
 | overall       |   3.05 |  0.76 |     1 |     3 |     3 |     3 |     5 |       0.16 |       0.15 |
 | quality       |   3.21 |  0.8  |     1 |     3 |     3 |     4 |     5 |       0.02 |      -0.17 |
 | repeatability |   1.49 |  0.6  |     1 |     1 |     1 |     2 |     3 |       0.78 |      -0.38 |  
-  
+
 Let's move a little deeper and see what wonders the data is yet to reveal.
-  
+
 ## Visualizing Data
 ### Correlation Heatmap
 Understanding how numerical columns correlate with each other can provide insights into potential relationships and dependencies between variables. Here's a heatmap showing these correlations:
 
 ![Correlation Heatmap](./corr_hmap.png)
 
-  
-Once upon a time in the land of data, three noble features—**Overall**, **Quality**, and **Repeatability**—came together in a grand castle of insights. The correlation heatmap served as a magical mirror, reflecting the relationships between these features.
+**Analysis for Correlation Heatmap:**
 
-As the nobles gathered, **Overall** stood tall, boasting a strong bond with **Quality**, reflected in a sturdy correlation of **0.83**. It whispered tales of how the overall experience was deeply shaped by the quality of their efforts, capturing the hearts of all who interacted with them.
+Analyzing the correlation heatmap of numerical features can reveal significant patterns and relationships between different variables. Let's break down the information presented.
 
-Yet, the connection with **Repeatability** was more modest, a gentle **0.51**, suggesting that while there was some camaraderie, it wasn't as robust. The noble **Repeatability** yearned for stronger ties, realizing that consistency could elevate its standing among the others.
+### Overview of the Heatmap
 
-Meanwhile, **Quality** noticed its own relationships. While it felt cherished by **Overall**, it shared a lighter connection with **Repeatability**, measured at **0.31**. This revealed an opportunity for growth—quality could enhance repeatability, ensuring that their achievements were not mere whims of chance but a reliable pattern.
+The heatmap uses a color gradient to represent correlation coefficients, where:
+- **1.0** signifies a perfect positive correlation (both variables move in the same direction).
+- **-1.0** denotes a perfect negative correlation (one variable increases while the other decreases).
+- **0.0** indicates no correlation.
 
-As the narrative unfolded, the castle echoed with potential. Together, they pondered strategies to deepen their connections, recognizing that the stronger their relationships, the richer their contributions to the kingdom of insights would be. Thus, the three features ventured forth, ready to forge paths of collaboration and understanding, ensuring their legacy would be one of harmony and success. 
+### Correlation Values
+
+1. **Overall vs. Quality**:
+   - **Correlation Coefficient: 0.83**
+   - This strong positive correlation indicates that as the overall score increases, the quality score also tends to increase significantly. This relationship suggests that improvements in overall metrics are inherently linked to enhancements in quality.
+
+2. **Quality vs. Repeatability**:
+   - **Correlation Coefficient: 0.31**
+   - The moderate positive correlation here shows that there is some interdependence between quality and repeatability. However, the correlation is weaker than the previous pair, indicating that while they do influence each other to some extent, there are additional factors affecting quality and repeatability.
+
+3. **Overall vs. Repeatability**:
+   - **Correlation Coefficient: 0.51**
+   - This indicates a modest positive correlation. It suggests that higher overall scores may lead to better repeatability scores, but the relationship is not as strong as that between overall and quality.
+
+### Visual Analysis
+
+- The **color gradient** from deep red (indicating strong correlations) to light blue (indicating weaker or no correlations) allows for quick visual inference.
+- The cells with stronger correlations (especially between overall and quality) stand out prominently, while those with weaker correlations are visibly cooler in tone.
+
+### Insights and Implications
+
+- **Focus on Quality**: Given the strong correlation with the overall score, prioritizing quality improvement initiatives could yield significant benefits across the board.
+- **Repeatability as an Area for Growth**: With a weaker correlation to overall metrics, there may be underlying factors affecting repeatability that need attention. Exploring the processes and practices related to repeatability might reveal avenues for improvement.
+- **Balanced Approach**: Striking a balance between improving overall, quality, and repeatability will likely yield the best results. Investing resources in quality enhancements could naturally elevate overall performance without neglecting the need for consistent repeatability.
+
+### Conclusion
+
+In summary, this correlation heatmap provides essential insights into how key numerical features are interrelated. Making data-driven decisions based on these correlations can help streamline strategies for enhancing performance and efficiency within the examined area. Leveraging the strong relationship between overall performance and quality, while addressing repeatability, can pave the way for more robust outcomes.
 
 ### Histograms
 Histograms help us understand the distribution of numerical columns. They can reveal patterns such as skewness, modality, and the presence of outliers. Here's a look at the histograms for the numerical columns:
 
 ![Histograms](./histogram.png)
 
-  
-Once upon a time in a bustling data landscape, three powerful stories were waiting to be uncovered through their histograms: **Overall**, **Quality**, and **Repeatability**.
+**Analysis for Histograms:**
 
-As we ventured into the **Overall** histogram, we noticed a striking peak at the value of 2. This told us that most observations clustered around this number, hinting at a commonality in the data that begged us to explore further. With fewer counts in the upper values, it seemed that achieving higher overall scores was a challenge for most.
+### Detailed Analysis of Histograms
 
-Next, our journey led us to the **Quality** histogram. Here, a similar pattern emerged: a dramatic peak at 2, followed by a slow decline. It hinted at a realm where quality was often perceived as moderate, with few instances reaching the heights of 4 or 5. The story was clear: many entities felt they only met basic quality standards, and aspirations soared higher yet were seldom realized.
+The presented histograms provide insights into the distributions of several numerical features of a dataset—namely, "overall," "quality," and "repeatability." Below is a more detailed examination of each histogram:
 
-Finally, we encountered the **Repeatability** histogram. This one stood out as rather unique, with virtually all data points condensing into a small range, creating an unusually narrow peak at around 1.75. This suggested that repeatability, perhaps a crucial factor in our exploration, was predominantly low, raising questions about consistency and reliability in the processes being assessed.
+#### 1. Overall Feature Distribution
+- **Distribution Shape**: The histogram for the "overall" feature exhibits a highly concentrated distribution around a specific value, suggesting that most observations fall within a narrow range. This may indicate a commonality in the data or a potential limitation on values.
+- **Peaks and Troughs**: A pronounced peak signifies that a particular score (presumably around 3) is predominant among the values. This might reflect a common rating, possibly indicative of average quality or acceptance in whatever context this dataset is derived from.
+- **Implications**: The concentration could point to a need for more varied outcomes; either the scoring system is limited, or the sampled items tend to perform similarly.
 
-Through these vivid narratives of histograms, a picture unfolded: a landscape where the quest for better quality and more consistent outcomes began, yet stagnated at fundamental levels. It was a call to action—to dive deeper into the data, seeking ways to elevate overall performance and enhance quality, thereby bringing forth the stories that lay ahead.
+#### 2. Quality Feature Distribution
+- **Distribution Shape**: Similar to the "overall" feature, the "quality" histogram shows a skewed distribution with a pronounced peak, likely at 3.5. This reveals that most items in the dataset are perceived similarly well concerning quality.
+- **Visual Gap**: The histogram displays multiple bars at equal intervals (1 to 5), which may imply rounding in ratings. For example, it seems many observations could not reach extreme values (like 1 or 5), suggesting a possible bias toward moderate evaluations.
+- **Implications**: Consistent quality ratings may need further investigation; it would be beneficial to assess whether these ratings are impacted by external factors or if they're inherently limited by the evaluation criteria.
+
+#### 3. Repeatability Feature Distribution
+- **Distribution Shape**: The "repeatability" feature histogram indicates a wider spread with fewer items concentrated in lower scores compared to the other two features.
+- **Skewness**: The distribution shows a heavy left skew, implying that very few instances achieve the higher, more favorable scores (likely in the 3 to 3.6 range), but it certainly depicts repeated observations with a significant cluster around the 1 to 2 range.
+- **Implications**: This aspect could indicate issues with consistency in measurements or experiences. If higher repeatability is desired, this may constitute a challenge, as lower repeatability could result in variability in outcomes, potentially undermining reliability.
+
+### Conclusion
+Overall, the histograms reveal a dataset with notable concentration around specific ratings, particularly in "overall" and "quality," while "repeatability" shows more variation with potential reliability issues. These patterns suggest further exploration is warranted to understand the fundamental reasons behind the distributions. The strong contrition in ratings also raises questions regarding the evaluation methods and the criteria used, hinting that the ratings might benefit from a review or a more nuanced assessment approach. 
+
+In practice, stakeholders might want to investigate why certain features score consistently low or highly, which could inform decisions for quality improvement or standardization of processes.
 
 ### Box Plots
 Box plots are useful for identifying outliers and understanding the spread and central tendency of the data. Here's a look at the box plots for the numerical columns:
 
 ![Box Plots](./box_plot.png)
 
-  
-In the expansive realm of data analysis, three box plots emerge as vivid storytellers, each narrating a unique tale about the variables we’re examining: Overall, Quality, and Repeatability.
+**Analysis for Box Plots:**
 
-First, let’s wander into the landscape of the **Overall** box plot. Imagine a serene field, where the median stands tall at a commendable 4.0, suggesting a generally favorable result. However, tiny outliers whisper stories of exceptions, perhaps areas where the performance has dipped unpredictably, revealing opportunities for deeper exploration and improvement.
+Let's dive into the box plots presented in the figure, each representing different variables: Overall, Quality, and Repeatability. 
 
-Next, as we step into the **Quality** box plot, the tale shifts slightly. Here, the median reveals itself at 3.5, reminiscent of an industrious workspace with moments of excellence but also some inconsistencies. The range, with its noticeable spread, indicates varying experiences—some fortunate enough to enjoy high quality while others grapple with lower scores. The outliers lurking at the edges beckon for attention, hinting at significant flaws or remarkable successes worth investigating.
+### Overall Box Plot
+- **Central Tendency**: The median appears to lie slightly above 3. This suggests a generally acceptable level of performance, but it may not be optimal.
+- **Spread**: The interquartile range (IQR) is relatively small, indicating that most of the data points are closely grouped around the median, which is a sign of consistency.
+- **Outliers**: There are a few outliers marked as points above the upper whisker. This could signify exceptional or problematic cases that warrant further investigation.
 
-Finally, we find ourselves in the domain of **Repeatability**. This narrative is more somber, with a median resting at just 1.5, hinting at challenges with consistency. The box is notably shorter, enveloping a narrower range, which denotes a struggle to maintain quality over repeated tests. The single outlier here might represent an extraordinary case, perhaps a triumph that stands against the trend, yet highlights the pressing need for improvement in this area.
+### Quality Box Plot
+- **Central Tendency**: The median for Quality is around 3.5, which suggests a decent level of quality, although there is room for improvement.
+- **Spread**: The IQR here seems to be larger than that in the Overall box plot. This indicates more variability in quality levels, suggesting that some units exhibit significantly higher or lower quality.
+- **Outliers**: The plot shows a couple of significant outliers on the lower end. These outliers could represent instances of particularly low quality that may need addressing.
 
-Together, these box plots weave a complex tapestry of insights: while the Overall variable hints at promise, Quality and particularly Repeatability signal areas ripe for development. This data-driven narrative encourages us to delve deeper, uncovering hidden stories that lie beneath the surface of these visual representations.
+### Repeatability Box Plot
+- **Central Tendency**: The median for Repeatability is notably lower, around 1.5, pointing to issues in consistency and reliability.
+- **Spread**: The IQR is quite extensive, signifying a broad range of repeatability scores. This variability is concerning, as it indicates inconsistencies in how repeatable the measurements or processes are.
+- **Outliers**: There are several outliers present at both the upper and lower ends, suggesting that some measurements are significantly different from the rest. This might indicate specific failures in repeatability that could affect overall performance.
+
+### Comparative Insights
+- **Overall Performance vs. Repeatability**: It’s interesting to note that despite a decent overall performance indicated by the Overall box plot, the repeatability issues highlighted in the Repeatability plot could undermine confidence in these results. Consistency is key, and if repeatability is lacking, it may impact the overall rating.
+- **Quality Variability**: The wider spread in the Quality scores shows that while some instances deliver high quality, there are lower-quality outcomes that could be improved. This suggests a need for targeted interventions to elevate the overall quality experience.
+- **Actionable Steps**: The presence of outliers across all plots suggests that a deeper dive into these specific cases could uncover insights that inform future improvements.
+
+### Conclusion
+These box plots effectively illustrate the distribution and central tendencies of the three variables. While overall performance seems acceptable, the issues with quality variability and repeatability signal a need for further examination and potential enhancement in processes to achieve higher consistency and quality. Addressing these outliers and inconsistencies could significantly boost overall performance and reliability.
 
 ## Chi-Square Test Reports
 Chi-square tests help us understand the relationships between categorical variables. Here are the results of the chi-square tests for pairs of categorical columns:
 
-
-
-
 ### Chi-Square Test for date and language
 
-| Metric | Value |
-| --- | --- |
-| Chi-Square Statistic | 20570.5270 |
-| p-value | 0.4389 |
-| Degrees of Freedom | 20540 |
-| Expected Frequencies | [[7.83392088e-04 4.73560517e-01 3.91696044e-04 ... 3.91696044e-04
-  2.81237759e-01 1.32393263e-01]
- [7.83392088e-04 4.73560517e-01 3.91696044e-04 ... 3.91696044e-04
-  2.81237759e-01 1.32393263e-01]
- [7.83392088e-04 4.73560517e-01 3.91696044e-04 ... 3.91696044e-04
-  2.81237759e-01 1.32393263e-01]
- ...
- [7.83392088e-04 4.73560517e-01 3.91696044e-04 ... 3.91696044e-04
-  2.81237759e-01 1.32393263e-01]
- [7.83392088e-04 4.73560517e-01 3.91696044e-04 ... 3.91696044e-04
-  2.81237759e-01 1.32393263e-01]
- [7.83392088e-04 4.73560517e-01 3.91696044e-04 ... 3.91696044e-04
-  2.81237759e-01 1.32393263e-01]] |
+| Metric               | Value               |
+|----------------------|---------------------|
+| Chi-Square Statistic | 20570.5270           |
+| p-value              | 0.4389             |
+| Degrees of Freedom   | 20540                |
+| Interpretation       | Not Significant      |
+
 
 
 ### Chi-Square Test for date and type
 
-| Metric | Value |
-| --- | --- |
-| Chi-Square Statistic | 15493.1025 |
-| p-value | 0.0000 |
-| Degrees of Freedom | 14378 |
-| Expected Frequencies | [[0.04386996 0.07677242 0.82726204 ... 0.00744222 0.00156678 0.01645123]
- [0.04386996 0.07677242 0.82726204 ... 0.00744222 0.00156678 0.01645123]
- [0.04386996 0.07677242 0.82726204 ... 0.00744222 0.00156678 0.01645123]
- ...
- [0.04386996 0.07677242 0.82726204 ... 0.00744222 0.00156678 0.01645123]
- [0.04386996 0.07677242 0.82726204 ... 0.00744222 0.00156678 0.01645123]
- [0.04386996 0.07677242 0.82726204 ... 0.00744222 0.00156678 0.01645123]] |
+| Metric               | Value               |
+|----------------------|---------------------|
+| Chi-Square Statistic | 15493.1025           |
+| p-value              | 0.0000             |
+| Degrees of Freedom   | 14378                |
+| Interpretation       | Significant      |
+
 
 
 ### Chi-Square Test for date and title
 
-| Metric | Value |
-| --- | --- |
-| Chi-Square Statistic | 4545618.8639 |
-| p-value | 1.0000 |
-| Degrees of Freedom | 4578366 |
-| Expected Frequencies | [[0.0003917 0.0003917 0.0003917 ... 0.0003917 0.0003917 0.0003917]
- [0.0003917 0.0003917 0.0003917 ... 0.0003917 0.0003917 0.0003917]
- [0.0003917 0.0003917 0.0003917 ... 0.0003917 0.0003917 0.0003917]
- ...
- [0.0003917 0.0003917 0.0003917 ... 0.0003917 0.0003917 0.0003917]
- [0.0003917 0.0003917 0.0003917 ... 0.0003917 0.0003917 0.0003917]
- [0.0003917 0.0003917 0.0003917 ... 0.0003917 0.0003917 0.0003917]] |
+| Metric               | Value               |
+|----------------------|---------------------|
+| Chi-Square Statistic | 4545618.8639           |
+| p-value              | 1.0000             |
+| Degrees of Freedom   | 4578366                |
+| Interpretation       | Not Significant      |
+
 
 
 ### Chi-Square Test for date and by
 
-| Metric | Value |
-| --- | --- |
-| Chi-Square Statistic | 2954953.2849 |
-| p-value | 0.0000 |
-| Degrees of Freedom | 2928632 |
-| Expected Frequencies | [[0.00042105 0.00042105 0.00042105 ... 0.00042105 0.00042105 0.00042105]
- [0.00042105 0.00042105 0.00042105 ... 0.00042105 0.00042105 0.00042105]
- [0.00042105 0.00042105 0.00042105 ... 0.00042105 0.00042105 0.00042105]
- ...
- [0.00042105 0.00042105 0.00042105 ... 0.00042105 0.00042105 0.00042105]
- [0.00042105 0.00042105 0.00042105 ... 0.00042105 0.00042105 0.00042105]
- [0.00042105 0.00042105 0.00042105 ... 0.00042105 0.00042105 0.00042105]] |
+| Metric               | Value               |
+|----------------------|---------------------|
+| Chi-Square Statistic | 2954953.2849           |
+| p-value              | 0.0000             |
+| Degrees of Freedom   | 2928632                |
+| Interpretation       | Significant      |
+
 
 
 ### Chi-Square Test for language and type
 
-| Metric | Value |
-| --- | --- |
-| Chi-Square Statistic | 829.0961 |
-| p-value | 0.0000 |
-| Degrees of Freedom | 70 |
-| Expected Frequencies | [[1.26696833e-01 2.21719457e-01 2.50113122e+00 6.78733032e-02
-  9.04977376e-03 2.14932127e-02 4.52488688e-03 4.75113122e-02]
- [5.51553544e+01 9.65218703e+01 1.08882579e+03 2.95475113e+01
-  3.93966817e+00 9.35671192e+00 1.96983409e+00 2.06832579e+01]
- [4.22322775e-02 7.39064857e-02 8.33710407e-01 2.26244344e-02
-  3.01659125e-03 7.16440422e-03 1.50829563e-03 1.58371041e-02]
- [8.44645551e-02 1.47812971e-01 1.66742081e+00 4.52488688e-02
-  6.03318250e-03 1.43288084e-02 3.01659125e-03 3.16742081e-02]
- [1.06003017e+01 1.85505279e+01 2.09261312e+02 5.67873303e+00
-  7.57164404e-01 1.79826546e+00 3.78582202e-01 3.97511312e+00]
- [5.06787330e-01 8.86877828e-01 1.00045249e+01 2.71493213e-01
-  3.61990950e-02 8.59728507e-02 1.80995475e-02 1.90045249e-01]
- [4.22322775e-02 7.39064857e-02 8.33710407e-01 2.26244344e-02
-  3.01659125e-03 7.16440422e-03 1.50829563e-03 1.58371041e-02]
- [8.02413273e-01 1.40422323e+00 1.58404977e+01 4.29864253e-01
-  5.73152338e-02 1.36123680e-01 2.86576169e-02 3.00904977e-01]
- [4.22322775e-02 7.39064857e-02 8.33710407e-01 2.26244344e-02
-  3.01659125e-03 7.16440422e-03 1.50829563e-03 1.58371041e-02]
- [3.03227753e+01 5.30648567e+01 5.98604072e+02 1.62443439e+01
-  2.16591252e+00 5.14404223e+00 1.08295626e+00 1.13710407e+01]
- [1.42745098e+01 2.49803922e+01 2.81794118e+02 7.64705882e+00
-  1.01960784e+00 2.42156863e+00 5.09803922e-01 5.35294118e+00]] |
+| Metric               | Value               |
+|----------------------|---------------------|
+| Chi-Square Statistic | 829.0961           |
+| p-value              | 0.0000             |
+| Degrees of Freedom   | 70                |
+| Interpretation       | Significant      |
+
 
 
 ### Chi-Square Test for language and title
 
-| Metric | Value |
-| --- | --- |
-| Chi-Square Statistic | 26334.1340 |
-| p-value | 0.0000 |
-| Degrees of Freedom | 23110 |
-| Expected Frequencies | [[1.13122172e-03 1.13122172e-03 1.13122172e-03 ... 1.13122172e-03
-  1.13122172e-03 1.13122172e-03]
- [4.92458522e-01 4.92458522e-01 4.92458522e-01 ... 4.92458522e-01
-  4.92458522e-01 4.92458522e-01]
- [3.77073906e-04 3.77073906e-04 3.77073906e-04 ... 3.77073906e-04
-  3.77073906e-04 3.77073906e-04]
- ...
- [3.77073906e-04 3.77073906e-04 3.77073906e-04 ... 3.77073906e-04
-  3.77073906e-04 3.77073906e-04]
- [2.70739065e-01 2.70739065e-01 2.70739065e-01 ... 2.70739065e-01
-  2.70739065e-01 2.70739065e-01]
- [1.27450980e-01 1.27450980e-01 1.27450980e-01 ... 1.27450980e-01
-  1.27450980e-01 1.27450980e-01]] |
+| Metric               | Value               |
+|----------------------|---------------------|
+| Chi-Square Statistic | 26334.1340           |
+| p-value              | 0.0000             |
+| Degrees of Freedom   | 23110                |
+| Interpretation       | Significant      |
+
 
 
 ### Chi-Square Test for language and by
 
-| Metric | Value |
-| --- | --- |
-| Chi-Square Statistic | 18226.2025 |
-| p-value | 0.0000 |
-| Degrees of Freedom | 12216 |
-| Expected Frequencies | [[8.36820084e-04 8.36820084e-04 8.36820084e-04 ... 8.36820084e-04
-  8.36820084e-04 8.36820084e-04]
- [4.54811715e-01 4.54811715e-01 4.54811715e-01 ... 4.54811715e-01
-  4.54811715e-01 4.54811715e-01]
- [4.18410042e-04 4.18410042e-04 4.18410042e-04 ... 4.18410042e-04
-  4.18410042e-04 4.18410042e-04]
- ...
- [7.94979079e-03 7.94979079e-03 7.94979079e-03 ... 7.94979079e-03
-  7.94979079e-03 7.94979079e-03]
- [2.96234310e-01 2.96234310e-01 2.96234310e-01 ... 2.96234310e-01
-  2.96234310e-01 2.96234310e-01]
- [1.36820084e-01 1.36820084e-01 1.36820084e-01 ... 1.36820084e-01
-  1.36820084e-01 1.36820084e-01]] |
+| Metric               | Value               |
+|----------------------|---------------------|
+| Chi-Square Statistic | 18226.2025           |
+| p-value              | 0.0000             |
+| Degrees of Freedom   | 12216                |
+| Interpretation       | Significant      |
+
 
 
 ### Chi-Square Test for type and title
 
-| Metric | Value |
-| --- | --- |
-| Chi-Square Statistic | 18094.2420 |
-| p-value | 0.0000 |
-| Degrees of Freedom | 16177 |
-| Expected Frequencies | [[0.04223228 0.04223228 0.04223228 ... 0.04223228 0.04223228 0.04223228]
- [0.07390649 0.07390649 0.07390649 ... 0.07390649 0.07390649 0.07390649]
- [0.83371041 0.83371041 0.83371041 ... 0.83371041 0.83371041 0.83371041]
- ...
- [0.0071644  0.0071644  0.0071644  ... 0.0071644  0.0071644  0.0071644 ]
- [0.0015083  0.0015083  0.0015083  ... 0.0015083  0.0015083  0.0015083 ]
- [0.0158371  0.0158371  0.0158371  ... 0.0158371  0.0158371  0.0158371 ]] |
+| Metric               | Value               |
+|----------------------|---------------------|
+| Chi-Square Statistic | 18094.2420           |
+| p-value              | 0.0000             |
+| Degrees of Freedom   | 16177                |
+| Interpretation       | Significant      |
+
 
 
 ### Chi-Square Test for type and by
 
-| Metric | Value |
-| --- | --- |
-| Chi-Square Statistic | 15971.2574 |
-| p-value | 0.0000 |
-| Degrees of Freedom | 10689 |
-| Expected Frequencies | [[0.02677824 0.02677824 0.02677824 ... 0.02677824 0.02677824 0.02677824]
- [0.08033473 0.08033473 0.08033473 ... 0.08033473 0.08033473 0.08033473]
- [0.84560669 0.84560669 0.84560669 ... 0.84560669 0.84560669 0.84560669]
- ...
- [0.00543933 0.00543933 0.00543933 ... 0.00543933 0.00543933 0.00543933]
- [0.00125523 0.00125523 0.00125523 ... 0.00125523 0.00125523 0.00125523]
- [0.0125523  0.0125523  0.0125523  ... 0.0125523  0.0125523  0.0125523 ]] |
+| Metric               | Value               |
+|----------------------|---------------------|
+| Chi-Square Statistic | 15971.2574           |
+| p-value              | 0.0000             |
+| Degrees of Freedom   | 10689                |
+| Interpretation       | Significant      |
+
 
 
 ### Chi-Square Test for title and by
 
-| Metric | Value |
-| --- | --- |
-| Chi-Square Statistic | 3576819.2435 |
-| p-value | 0.0000 |
-| Degrees of Freedom | 3156309 |
-| Expected Frequencies | [[0.00041841 0.00041841 0.00041841 ... 0.00041841 0.00041841 0.00041841]
- [0.00041841 0.00041841 0.00041841 ... 0.00041841 0.00041841 0.00041841]
- [0.00041841 0.00041841 0.00041841 ... 0.00041841 0.00041841 0.00041841]
- ...
- [0.00041841 0.00041841 0.00041841 ... 0.00041841 0.00041841 0.00041841]
- [0.00041841 0.00041841 0.00041841 ... 0.00041841 0.00041841 0.00041841]
- [0.00041841 0.00041841 0.00041841 ... 0.00041841 0.00041841 0.00041841]] |
+| Metric               | Value               |
+|----------------------|---------------------|
+| Chi-Square Statistic | 3576819.2435           |
+| p-value              | 0.0000             |
+| Degrees of Freedom   | 3156309                |
+| Interpretation       | Significant      |
+
 
