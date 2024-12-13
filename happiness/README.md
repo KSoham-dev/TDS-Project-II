@@ -1,20 +1,20 @@
 
 # Data Analysis Project 
 Hey! Hope you are doing fine. Hmm... You've got some interesting data I see.  
-Let's begin this journey with fist identifying what your data is like.  
-So, you have got 100 rows and 500 columns in your data and as I can  
+Let's begin this journey with first identifying what your data is like.  
+So, you have got 2363 rows and 11 columns in your data and as I can  
 see this data is related to Well-being. Below are some key statistics  
 about the data you provided  
 
 ## Key Statistics
 |       |   year |   Life Ladder |   Log GDP per capita |   Social support |   Healthy life expectancy at birth |   Freedom to make life choices |   Generosity |   Perceptions of corruption |   Positive affect |   Negative affect |
 |:------|-------:|--------------:|---------------------:|-----------------:|-----------------------------------:|-------------------------------:|-------------:|----------------------------:|------------------:|------------------:|
-| count |   2363 |          2363 |                 2335 |             2350 |                               2300 |                           2327 |         2282 |                        2238 |              2339 |              2347 |
+| count |   2363 |          2363 |                 2363 |             2363 |                               2363 |                           2363 |         2363 |                        2363 |              2363 |              2363 |
 | mean  |   2014 |             5 |                    9 |                0 |                                 63 |                              0 |            0 |                           0 |                 0 |                 0 |
 | std   |      5 |             1 |                    1 |                0 |                                  6 |                              0 |            0 |                           0 |                 0 |                 0 |
 | min   |   2005 |             1 |                    5 |                0 |                                  6 |                              0 |            0 |                           0 |                 0 |                 0 |
 | 25%   |   2011 |             4 |                    8 |                0 |                                 59 |                              0 |            0 |                           0 |                 0 |                 0 |
-| 50%   |   2015 |             5 |                    9 |                0 |                                 65 |                              0 |            0 |                           0 |                 0 |                 0 |
+| 50%   |   2015 |             5 |                    9 |                0 |                                 64 |                              0 |            0 |                           0 |                 0 |                 0 |
 | 75%   |   2019 |             6 |                   10 |                0 |                                 68 |                              0 |            0 |                           0 |                 0 |                 0 |
 | max   |   2023 |             8 |                   11 |                0 |                                 74 |                              0 |            0 |                           0 |                 0 |                 0 |  
   
@@ -26,76 +26,76 @@ Let's see how numerical columns correlate with each other
 ![Figure](./corr_hmap.png)
 
   
-Once upon a time in the land of data, a captivating correlation heatmap emerged, revealing the intricate relationships among various factors affecting quality of life.
+Once upon a time in a land rich with data, a group of researchers sought to understand the intricate relationships between the various facets of human well-being and prosperity. They gathered a treasure trove of numerical features and created a colorful correlation heatmap to find hidden stories within the numbers.
 
-At the center of this tale was the year, providing a timeline to measure progress. Its strong bond with the "Life Ladder" (0.78) suggested that as time passed, people felt increasingly optimistic about their lives, like climbing a well-worn path to a brighter future.
+As they gazed upon the heatmap, the first thing that caught their eye was the strong bond between **Log GDP per capita** and **Life Ladder**, represented by a robust correlation of 0.77. This indicated that as the economic wealth of a country increased, so too did the perceived quality of life among its citizens. It suggested that prosperity nurtured happiness.
 
-The "Log GDP per capita" (0.72) unveiled the economic tale, indicating that wealth was intricately linked to life satisfaction—the higher the wealth, the higher the happiness. However, whispers of caution arose as "Social support" (0.67) revealed that true happiness wasn't just about wealth; it's also about community ties and friendships that uplift spirits.
+Next, they noticed the interconnections between personal freedoms and well-being. The **Freedom to make life choices** had a positive correlation with **Life Ladder** (0.60) and a hint of connection with **Generosity** (0.34). This hinted that when individuals felt empowered in their choices, they were not only likely to thrive but also engage in acts of kindness towards others, enriching their communities.
 
-In another corner, the "Healthy life expectancy at birth" painted a hopeful picture of good health (0.70). As people lived healthier lives, their sense of well-being flourished. Yet, amid this growth, the "Freedom to make choices" (0.47) also demanded attention. It hinted that even in a prosperous land, the ability to choose one’s path was crucial for happiness.
+However, the journey wasn’t without its shadows. The researchers observed that **Negative affect**, a measure of emotional distress, enjoyed a strong negative correlation with **Life Ladder** (-0.73). This made it clear that the more individuals experienced negative emotions, the less joy they found in their lives. It underscored the importance of mental health for overall happiness.
 
-As the story unfolded, "Generosity" (0.42) and "Perception of corruption" (-0.46) offered contrasting lessons. Generosity fostered connections and satisfaction, while corruption echoed shadows of doubt, dampening spirits and trust.
+In the corner of the heatmap, the researchers noted the curious dance of **Generosity** and **Perceptions of Corruption**. The correlation between these two was surprising; a negative relationship (-0.54) suggested that as perceptions of corruption increased, the spirit of generosity waned. People tended to lose faith in sharing and caring when trust in their institutions faltered.
 
-Finally, the contrasting emotions of "Positive affect" (0.31) and "Negative affect" (-0.20) played their roles in this narrative, illustrating how positivity could lift the human spirit, while negativity cast a pall, connecting deeply with the other variables.
-
-And so, this heatmap told a tale of interconnectedness—a reminder that life’s quality is not just a solitary climb but a journey enriched by community, health, freedom, and integrity. In this world of data, every number was a thread woven into the larger tapestry of happiness. 
+As they concluded their analysis, the researchers felt a sense of fulfillment. This vibrant heatmap had illuminated the complex tapestry of life experiences. It told a tale where wealth and freedom intertwined to create happiness, but where emotional well-being and trust in society remained crucial for flourishing. With their findings, they hoped to inspire policies that could nurture a world where happiness blossomed for all. And so, armed with data-driven insights, they set forth to make a difference, one correlation at a time. 
 
 Now in the second figure we'll see numerical columns spread themselves.  
   
 ![Figure](./histogram.png)
 
   
-The visual story told by these histograms is a fascinating exploration of the well-being and quality of life metrics as captured in a dataset over a span of years.
+In the bustling world of data, we find ourselves amidst a vibrant tapestry woven from various aspects of human experience. As we delve into the histograms laid before us, each subplot tells a unique story, encapsulating the essence of societal factors and individual well-being.
 
-Starting with the **year** histogram, we see a clear picture of data collection, with peaks representing different years. This steady rise in recorded years illustrates the growing interest in understanding how various factors influence life satisfaction and societal progress.
+### Year: The Passage of Time
+The journey begins with the histogram of the **year**, where we see a steady increase in data points from 2005 onward. This upward trajectory reflects ongoing progress and the accumulation of experiences across time, hinting at the evolving narrative of societal conditions.
 
-Next, the **Life Ladder** histogram reveals a roughly normal distribution, suggesting that most individuals report a moderate level of life satisfaction. However, there are noticeable tails on either end, indicating that while many are content, there are also significant numbers experiencing extreme satisfaction and dissatisfaction.
+### Life Ladder: Climbing High
+Next, we encounter the **Life Ladder** histogram, a symbol of aspiration. The distribution is notably skewed to the right, indicating that a significant portion of individuals reports higher life satisfaction. However, the tail on the left suggests that while many thrive, a considerable number struggle, reminding us of the disparities that persist in our world.
 
-Moving to the **Log GDP per capita**, the histogram leans towards the higher end, indicating a concentration of countries or regions with relatively high economic performance. This aligns with the expectation that wealthier nations tend to report better quality of life metrics.
+### Log GDP per Capita: The Wealth Equation
+In the **Log GDP per Capita** plot, we observe a bell-shaped curve, pointing to a concentration of data around the middle. This highlights economic strengths as well as inequalities, where wealth is abundant, yet not universally enjoyed. The distribution speaks to the story of prosperity, but also to the barriers faced by those on the lower end of the economic spectrum.
 
-The **Social support** histogram shows an interesting distribution with a slight left skew. Most people appear to report moderate to high levels of social support, which is essential for individual well-being and community strength.
+### Social Support: A Helping Hand
+The histogram of **Social Support** portrays a hopeful scene. Most individuals rate their sense of community positively, suggesting that relational bonds are a source of strength. Yet, the slight leftward skew prompts us to reflect on those who feel isolated—a quiet call to action for enhancing community connections.
 
-The **Healthy life expectancy at birth** histogram suggests that many individuals enjoy a relatively long and healthy life, though some outliers indicate varying conditions across different populations.
+### Healthy Life Expectancy at Birth: A Healthier Tomorrow
+Turning to **Healthy Life Expectancy at Birth**, we see another right-skewed distribution that paints a picture of longevity and wellness. Many experience a fulfilling life, yet a noticeable number are deprived of this basic joy, urging us to work towards health equity for all.
 
-In terms of **Freedom to make life choices**, the distribution is centered towards the higher end as well. People generally feel they have a reasonable amount of control over their lives, pointing to varying degrees of liberty and self-determination across different cultures.
+### Freedom to Make Life Choices: Empowerment
+The **Freedom to Make Life Choices** histogram reveals a profoundly empowering narrative. Most people feel they have control over their lives, suggesting an environment that encourages autonomy, critical for personal growth and societal progress. However, the occasional dips remind us that freedom is not uniformly experienced.
 
-The **Generosity** histogram, while also fairly centered, hints at a tendency towards lower generosity scores, suggesting that while some individuals are quite generous, many do not exhibit high levels of charitable behavior.
+### Generosity: The Giving Spirit
+With **Generosity**, the histogram echoes a heartwarming trend—a significant number of people engage in altruistic behaviors. The sharp drop-off on the left side illustrates that while many contribute, a few do not engage in giving, highlighting potential areas for fostering empathy and kindness.
 
-**Perceptions of corruption** present a slightly different narrative, with a considerable number of respondents leaning towards the belief that corruption exists in their societies, reflecting a widespread distrust in public institutions or systems.
+### Perceptions of Corruption: Trust in Society
+The depiction of **Perceptions of Corruption** unnervingly clusters toward lower perceptions, suggesting a widespread distrust in institutions. This histogram acts as a mirror for societies grappling with transparency issues, urging a collective need for accountability.
 
-When we look at **Positive affect**, we see a distribution suggesting that people generally experience positive emotions frequently, yet there are some low scores indicating moments of dissatisfaction or unhappiness.
+### Positive Affect: The Joyful Moments
+In the subplot of **Positive Affect**, we observe a healthy distribution showcasing a majority indulging in positive emotions. This histogram tells a tale of joy and contentment, yet the slight dip hints at the challenges some face in finding happiness amidst life's pressures.
 
-Lastly, **Negative affect** shows a more pronounced peak, indicating that while many individuals experience low levels of negative emotions, a significant portion also grapples with higher levels of negativity, highlighting the ongoing struggles with mental health and emotional well-being in various communities.
+### Negative Affect: The Balancing Act
+Finally, the **Negative Affect** histogram, with its pronounced left skew, illustrates that while many experience minimal negativity, there exists a portion still battling tough emotions. It serves as a reminder of the psychological struggles that often go unnoticed.
 
-Together, these histograms form a complex tapestry of human experience, showing how economic factors, societal support, and individual perceptions intertwine to shape quality of life. Through these insights, we can appreciate the nuances of happiness and well-being in today’s world, recognizing both strides made and challenges that remain.
+### Conclusion
+These histograms collectively frame a narrative of human experience—where progress is celebrated, yet challenges persist. They beckon us to delve deeper, fostering understanding and inspiring action towards a more equitable and joyful society. Each plot is a chapter in a broader story, urging us to listen, learn, and strive for improvement.
 
 Lastly, we'll see some mischievous datapoints that don't follow the trend (Outliers!).  
   
 ![Figure](./box_plot.png)
 
   
-In the serene landscape of data representation, box plots emerge as the wise storytellers of numerical tales, guiding us through the intricate narratives of our chosen variables. 
+Once upon a time in the land of data, our curious analyst stumbled upon a treasure trove of box plots, each telling a unique story about key variables of happiness and well-being.
 
-Let's step into this visual world together, where each box plot invites us to explore different facets of life and well-being.
+In the first plot, **Year**, the data resembled a steady progression over time. With values clustering in the middle, our analyst noted how stability often leads to contentment, but a few outliers hinted at years of significant change.
 
-### The Journey through Time: Year
-The first box plot reveals the **Year** variable, with its steady heartbeat between 2015 and 2021. This consistency hints at stability in data collection, allowing us to observe trends without the disruption of abrupt changes. 
+Next, the **Life Ladder** plot stood tall and proud. Most values nestled comfortably in the box, suggesting that people felt relatively happy. Yet, the whiskers extended, indicating there's always room for improvement for some souls, while a few points drifted away, reminding us that happiness can be fleeting.
 
-### The Ladder of Life: Life Expectancy
-Next, we encounter the **Life Ladder**, a metaphor for the journey of life itself. The plot indicates a significant range, with most individuals resting comfortably in the middle, reflecting a general sense of well-being. However, the presence of a few outliers suggests that not everyone has climbed the rungs equally, emphasizing the disparities that exist within society.
+When it came to **Log gdp per capita**, the analyst noticed a healthy range, with a tight central box indicating that wealth does influence happiness. However, lurking at the edges were outliers, suggesting that even in affluence, some individuals might feel left behind.
 
-### Economic Pulse: Log GDP per Capita
-We then ascend to the **Log of GDP per Capita**, which illustrates the economic vitality of each region. The plot indicates a healthy spread, suggesting varying levels of prosperity. While many enjoy economic affluence, the whispered presence of outliers reminds us that not all regions experience this growth equally.
+The **Social Support** box plot revealed a high level of connectedness among the majority, with values clumped together, but a few lonely points indicated that not everyone has access to this crucial lifeline. This whispered tales of loneliness in a bustling world.
 
-### The Support Structure: Social Support
-Moving on, the **Social Support** plot illustrates a comforting sense of community, where most individuals feel a solid backing. The narrow range signifies that the majority share a similar experience, fostering a sense of collective strength and resilience in facing life’s challenges.
+The next plot displayed **Healthy Life Expectancy at Birth**. Here, most values soared, promising a long and hearty existence for many. However, the presence of outliers captured the analyst's attention, illustrating disparities in health that often dictate one's quality of life.
 
-### The Gift of Longevity: Healthy Life Expectancy at Birth
-In the next scene, we explore **Healthy Life Expectancy at Birth**. Here, the data showcases a promising outlook on health, yet the outliers reveal the harsh realities faced by a minority. The broader shape of the box signifies a generally positive health trajectory, suggesting that many are likely to enjoy longer, healthier lives.
+Last but not least was the **Freedom to Make Life Choices**, which told a compelling tale of empowerment. With a robust central box, it painted a picture of a society where people generally felt free to choose their paths. Yet, again, those outliers served as powerful reminders that for some, choices still feel limited.
 
-### Choices that Matter: Freedom to Make Life Choices
-Finally, we arrive at the **Freedom to Make Life Choices** plot, where the data present a blend of liberation and constraint. While the majority feel empowered to steer their own destinies, the presence of those on the edges of the box reminds us that not everyone has this luxury. The variations highlighted here serve as a call to action for fostering greater equity in personal freedoms.
-
-### Conclusion
-As we step back from this visual tale, we realize that these box plots not only present data but weave a narrative of society’s strengths and struggles. Each variable contributes to a larger picture of well-being, economic health, and personal freedom, urging us to consider how we can nurture these areas for a brighter, more equitable future.
+Together, these plots wove a narrative of contrasts—between happiness and sorrow, health and struggle, freedom and confinement. The analyst closed the book on this chapter, realizing that behind every number lies a unique story waiting to be told.
 
